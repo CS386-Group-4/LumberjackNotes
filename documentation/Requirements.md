@@ -9,7 +9,22 @@
 
 
 ## 2. Stakeholders
-
+- Users
+  - High school students
+  - College students
+  - Professionals
+- Clients
+  - Academic institutions
+  - Businesses
+- Competitors
+  - Evernote
+- Developers
+  - Gustavo Valencia
+  - Armando Martinez
+  - Stefan Mihailovic
+  - Nicholas Botticelli
+  - Collin Rampata
+  - Kyle Austria
 
 ## 3. Functional requirements
 
