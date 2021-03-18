@@ -2,7 +2,7 @@ package org.cs386group4.lumberjacknotes.models;
 
 public class Organization
 {
-    void moveToFolder(Note note)
+    void moveToFolder(Notes note)
     {
 
     }
