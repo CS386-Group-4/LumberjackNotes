@@ -17,6 +17,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.MainActivity"
+            android:windowSoftInputMode="adjustResize">
 
             <meta-data
                 android:name="android.app.searchable"
