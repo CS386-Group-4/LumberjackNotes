@@ -10,8 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LumberjackNotes">
         <activity android:name=".ui.NotesListActivity" />
-        <activity android:name=".ui.LoginActivity" />
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
