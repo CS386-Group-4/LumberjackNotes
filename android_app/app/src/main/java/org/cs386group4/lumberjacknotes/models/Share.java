@@ -2,9 +2,9 @@ package org.cs386group4.lumberjacknotes.models;
 
 public class Share
 {
-    Notes noteToBeShared;
+    private Notes noteToBeShared;
 
-    void shareNote(int uniqueID)
+    public void shareNote(int uniqueID)
     {
 
     }

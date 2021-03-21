@@ -2,43 +2,43 @@ package org.cs386group4.lumberjacknotes.models;
 
 public class GroupManagement
 {
-    String[] membersList;
-    Permissions memberRole;
-    Boolean privacySettings;
-    String groupName;
-    int[] sharedNotesList;
+    private String[] membersList;
+    //private Permissions memberRole; Commented out for testing purposes
+    private Boolean privacySettings;
+    private String groupName;
+    private int[] sharedNotesList;
 
-    void inviteMembers(String memberEmail)
+    public void inviteMembers(String memberEmail)
     {
 
     }
 
-    void removeFromGroup(String memberEmail)
+    public void removeFromGroup(String memberEmail)
     {
 
     }
 
-    void createGroup(String groupName)
+    public void createGroup(String groupName)
     {
 
     }
 
-    void renameGroup(String newGroupName)
+    public void renameGroup(String newGroupName)
     {
 
     }
 
-    void deleteGroup()
+    public void deleteGroup()
     {
 
     }
+//    Commented out for testing purposes
+//    public void setMemberRole(Permissions newRole)
+//    {
+//
+//    }
 
-    void setMemberRole(Permissions newRole)
-    {
-
-    }
-
-    void setPrivacySettings(boolean newPrivacySetting)
+    public void setPrivacySettings(boolean newPrivacySetting)
     {
 
     }

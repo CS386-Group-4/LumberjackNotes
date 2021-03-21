@@ -2,14 +2,14 @@ package org.cs386group4.lumberjacknotes.models;
 
 public class Tutorial
 {
-    String[] information;
+    private String[] information;
 
-    void help()
+    public void help()
     {
 
     }
 
-    void runTutorial()
+    public void runTutorial()
     {
 
     }

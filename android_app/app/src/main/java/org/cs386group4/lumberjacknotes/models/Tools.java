@@ -2,19 +2,19 @@ package org.cs386group4.lumberjacknotes.models;
 
 public class Tools extends Organization
 {
-    String selectedText;
+    private String selectedText;
 
-    String formatText(String selectedText)
+    private String formatText(String selectedText)
     {
         return null;
     }
 
-    void insertObject()
+    public void insertObject()
     {
 
     }
 
-    void drawingTool()
+    public void drawingTool()
     {
 
     }

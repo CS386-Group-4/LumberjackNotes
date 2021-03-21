@@ -2,15 +2,15 @@ package org.cs386group4.lumberjacknotes.models;
 
 public class Save
 {
-    boolean savedToCloud = false;
-    boolean successfulSave = false;
+    private boolean savedToCloud = false;
+    private boolean successfulSave = false;
 
-    void autoSave()
+    public void autoSave()
     {
 
     }
 
-    void manualSave()
+    public void manualSave()
     {
 
     }

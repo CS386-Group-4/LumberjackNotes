@@ -2,52 +2,52 @@ package org.cs386group4.lumberjacknotes.models;
 
 public class Organization
 {
-    void moveToFolder(Notes note)
+    public void moveToFolder(Notes note)
     {
 
     }
 
-    void createFolder(String folderName)
+    public void createFolder(String folderName)
     {
 
     }
 
-    void createSection(String sectionName)
+    public void createSection(String sectionName)
     {
 
     }
 
-    void createCategory(String categoryName)
+    public void createCategory(String categoryName)
     {
 
     }
 
-    void deleteCategory(String category)
+    public void deleteCategory(String category)
     {
 
     }
 
-    void applyCategory()
+    public void applyCategory()
     {
 
     }
 
-    void createTag(String newTagName)
+    public void createTag(String newTagName)
     {
 
     }
 
-    void deleteTag(String tagName)
+    public void deleteTag(String tagName)
     {
 
     }
 
-    void applyTag()
+    public void applyTag()
     {
 
     }
 
-    void rename()
+    public void rename()
     {
 
     }

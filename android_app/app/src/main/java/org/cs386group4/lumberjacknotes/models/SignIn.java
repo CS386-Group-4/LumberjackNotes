@@ -2,14 +2,14 @@ package org.cs386group4.lumberjacknotes.models;
 
 public class SignIn
 {
-    boolean signInStatus = false;
+    private boolean signInStatus = false;
 
-    UserProfile accountCreation()
+    public UserProfile accountCreation()
     {
         return null;
     }
 
-    void login()
+    public void login()
     {
 
     }
