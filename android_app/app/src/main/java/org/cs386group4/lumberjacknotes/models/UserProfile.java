@@ -4,7 +4,9 @@ public class UserProfile
 {
     String[] personalDetails;
     String[] enrolledGroups;
-    int[] writtenNotes;
+
+    Notes notes = new Notes();
+    Notes[] notesArrayToBeUploaded = notes.getWrittenNotes();
 
     void editProfile()
     {

@@ -5,11 +5,35 @@ import java.lang.String;
 
 public class Notes
 {
+    // Declares max amount of notes that can be created by a user
+    final int maxWrittenNotes = 1000000;
+    // Declares a local array of notes of max size
+    Notes writtenNotes[] = new Notes[maxWrittenNotes];
+    // Declares other variables
     String name;
     String content;
     boolean accessControls;
     int uniqueID;
     String fileType;
+
+    /**
+     * This function returns a copy of the written notes array. Currently used to retrieve a copy of the array from
+     * other classes, like the userProfile class.
+     * @return Copy of user notes array;
+     */
+    Notes[] getWrittenNotes()
+    {
+        // Declares temporary array that will be returned with the contents of the writtenNotes array
+        Notes arrayToBeReturned[] = new Notes[maxWrittenNotes];
+        // Declares looping variable
+        int index;
+        // This loop copies the contents of the writtenNotes array to the arrayToBeReturned array
+        for(index = 0; index < arrayToBeReturned.length - 1; index++)
+        {
+            arrayToBeReturned[index] = writtenNotes[index];
+        }
+        return arrayToBeReturned;
+    }
 
     /**
      * This function serves as the default constructor when creating new Notes objects.
@@ -37,7 +61,7 @@ public class Notes
     Notes[] searchNotes(String searchString)
     {
         // New array of Notes objects that will hold the notes with names that match our search string.
-        Notes searchedNotes[1000000];
+        Notes searchedNotes[] = new Notes[maxWrittenNotes];
 
         // Declares looping variables
         int index;
@@ -105,6 +129,8 @@ public class Notes
         newNote.name = noteName;
         // Calls the createUniqueID() function to assign the note with a uniqueID
         newNote.uniqueID = createUniqueID();
+        // Declares looping variable
+        int index;
 
         // This loop appends the new note to the array of written notes
         for(index = 0; index < writtenNotes.length - 1; index++)
@@ -126,8 +152,8 @@ public class Notes
     {
         // Creates a new Random Object for generating a uniqueID
         Random randInt = new Random();
-        // Sets the bound for the highest possible generated uniqueID to one million
-        final int maxUniqueIDNumber = 1000000;
+        // Sets the bound for the highest possible generated uniqueID to one million (max amount of written notes)
+        final int maxUniqueIDNumber = maxWrittenNotes;
         // Assigns the uniqueID with a random number between 0 and 999,999
         int uniqueID = randInt.nextInt(maxUniqueIDNumber);
         // Declares looping variable
