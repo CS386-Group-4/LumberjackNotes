@@ -2,9 +2,9 @@ package org.cs386group4.lumberjacknotes.models;
 
 public class UserPreferences
 {
-    int[] workspaceSetup;
+    private int[] workspaceSetup;
 
-    void customize()
+    public void customize()
     {
 
     }
