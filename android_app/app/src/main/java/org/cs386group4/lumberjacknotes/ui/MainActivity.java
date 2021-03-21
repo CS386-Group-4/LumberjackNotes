@@ -8,9 +8,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.ViewGroup;
 import android.widget.SearchView;
 
 import org.cs386group4.lumberjacknotes.R;
+import org.cs386group4.lumberjacknotes.controllers.NoteTakingController;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -26,6 +28,9 @@ public class MainActivity extends AppCompatActivity
         // initialize toolbar
         setSupportActionBar(toolbar);
         this.invalidateOptionsMenu();
+
+        ViewGroup notetakingRoot = findViewById(R.id.notetaking_root);
+        new NoteTakingController(notetakingRoot);
     }
 
     @Override

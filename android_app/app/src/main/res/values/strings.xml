@@ -7,12 +7,18 @@
     <string name="note_export_title">Export Note</string>
     <string name="note_profile_title">Profile</string>
 
+    <string name="login">Login</string>
+    <string name="login_register">Sign Up</string>
+    <string name="login_banner_title">@string/app_name</string>
+    <string name="login_banner_subtitle">@string/login</string>
+    <string name="login_register_banner">Don\'t have an account yet?</string>
+    <string name="login_register_text">Sign Up</string>
+
     <string name="note_searchable_hint">Search notes…</string>
-    <string name="prompt_email">Email</string>
+    <string name="prompt_email">E-mail</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
