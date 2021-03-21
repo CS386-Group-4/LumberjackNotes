@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="surface">@color/design_dark_default_color_surface</color>
+    <color name="on_surface">@color/design_dark_default_color_on_surface</color>
+
+    <color name="primary">#5593e5</color>
+    <color name="primary_variant">#394b81</color>
+    <color name="on_primary">@color/black</color>
+
+    <color name="secondary">#ffff56</color>
+    <color name="secondary_variant">#fff257</color>
+    <color name="on_secondary">@color/black</color>
+</resources>
