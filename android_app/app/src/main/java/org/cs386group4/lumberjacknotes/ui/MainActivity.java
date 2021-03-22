@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import org.cs386group4.lumberjacknotes.controllers.WorkspaceController;
 
 public class MainActivity extends AppCompatActivity
 {
+    WorkspaceController workspaceController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -31,19 +34,18 @@ public class MainActivity extends AppCompatActivity
         this.invalidateOptionsMenu();
 
         // Initialize workspace controller
-        WorkspaceController workspaceController = new WorkspaceController(this);
+        workspaceController = new WorkspaceController(this);
 
         // Initialize note taking controller
         ViewGroup notetakingRoot = findViewById(R.id.notetaking_root);
         new NoteTakingController(workspaceController, notetakingRoot);
-
-        onDestroy();
     }
 
     @Override
     protected void onDestroy()
     {
-        // TODO: Save notes to filesystem or cloud
+        // TODO: Save notes cloud
+        workspaceController.saveNoteToStorage(this);
 
         super.onDestroy();
     }
