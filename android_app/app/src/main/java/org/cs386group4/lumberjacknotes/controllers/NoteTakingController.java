@@ -46,4 +46,6 @@ public class NoteTakingController
     {
         this.note = note;
     }
+
+    //
 }

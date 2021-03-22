@@ -10,6 +10,7 @@ public class Notes
     private String name;
     private String content;
     private boolean accessControls;
+
     private int uniqueID;
     private String fileType;
 
@@ -173,6 +174,15 @@ public class Notes
     }
 
     /**
+     *
+     * @return
+     */
+    public int getUniqueID()
+    {
+        return uniqueID;
+    }
+
+    /**
      * This function returns a copy of the written notes array. Currently used to retrieve a copy of the array from
      * other classes, like the userProfile class.
      * @return Copy of user notes array;
@@ -259,5 +269,14 @@ public class Notes
     public void setName(String name)
     {
         this.name = name;
+    }
+
+    /**
+     *
+     * @param uniqueID
+     */
+    public void setUniqueID(int uniqueID)
+    {
+        this.uniqueID = uniqueID;
     }
 }
