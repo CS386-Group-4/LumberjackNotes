@@ -2,17 +2,23 @@ package org.cs386group4.lumberjacknotes.controllers;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.ViewGroup;
 
 import androidx.appcompat.widget.AppCompatEditText;
 
 import org.cs386group4.lumberjacknotes.R;
+import org.cs386group4.lumberjacknotes.models.Notes;
 
 public class NoteTakingController
 {
-    public NoteTakingController(ViewGroup notetakingRoot)
+    Notes note;
+
+    public NoteTakingController(WorkspaceController workspaceController, ViewGroup notetakingRoot)
     {
         AppCompatEditText editor = notetakingRoot.findViewById(R.id.notetaking_editor);
+
+        this.note = note;
 
         editor.addTextChangedListener(new TextWatcher()
         {
@@ -25,6 +31,8 @@ public class NoteTakingController
             public void onTextChanged(CharSequence text, int start, int before, int count)
             {
                 // TODO: Put text into model
+                //Log.e("NoteTakingController", "text: " + text.toString());
+                note.setContent(text.toString());
             }
 
             @Override
@@ -32,5 +40,10 @@ public class NoteTakingController
             {
             }
         });
+    }
+
+    public void setCurrentNote(Notes note)
+    {
+        this.note = note;
     }
 }

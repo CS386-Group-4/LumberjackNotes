@@ -13,6 +13,7 @@ import android.widget.SearchView;
 
 import org.cs386group4.lumberjacknotes.R;
 import org.cs386group4.lumberjacknotes.controllers.NoteTakingController;
+import org.cs386group4.lumberjacknotes.controllers.WorkspaceController;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -29,8 +30,22 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         this.invalidateOptionsMenu();
 
+        // Initialize workspace controller
+        WorkspaceController workspaceController = new WorkspaceController(this);
+
+        // Initialize note taking controller
         ViewGroup notetakingRoot = findViewById(R.id.notetaking_root);
-        new NoteTakingController(notetakingRoot);
+        new NoteTakingController(workspaceController, notetakingRoot);
+
+        onDestroy();
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        // TODO: Save notes to filesystem or cloud
+
+        super.onDestroy();
     }
 
     @Override
