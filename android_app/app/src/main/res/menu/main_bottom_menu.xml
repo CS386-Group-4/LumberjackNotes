@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/bottom_draw"
+        android:title="Draw"
+        android:icon="@drawable/ic_draw_24"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/bottom_font"
+        android:title="Font"
+        android:icon="@drawable/ic_font_24"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/bottom_export"
+        android:title="@string/note_export_title"
+        app:showAsAction="never" />
+
+</menu>

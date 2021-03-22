@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <color name="surface">@color/design_default_color_surface</color>
+    <color name="on_surface">@color/design_default_color_on_surface</color>
+
+    <color name="primary">#0066B2</color>
+    <color name="primary_variant">#002454</color>
+    <color name="on_primary">@color/white</color>
+
+    <color name="secondary">#FFDA0B</color>
+    <color name="secondary_variant">#FAC01A</color>
+    <color name="on_secondary">@color/black</color>
+</resources>
