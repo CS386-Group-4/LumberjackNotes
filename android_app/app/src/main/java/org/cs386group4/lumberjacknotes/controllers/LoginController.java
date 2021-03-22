@@ -1,9 +1,11 @@
 package org.cs386group4.lumberjacknotes.controllers;
 
 import android.content.Intent;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.cs386group4.lumberjacknotes.R;
 import org.cs386group4.lumberjacknotes.ui.LoginActivity;
