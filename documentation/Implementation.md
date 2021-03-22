@@ -67,5 +67,17 @@ We adopted the MIT license for its simplicity and permissibility, allowing other
 
 ## 9. Lessons learned
 
+Over the course of the first release, our team gained knowledge in several different areas of software development.
+When devising our licensing agreement, the team had to research the various types of software licensing agreements
+as well as the legal ramifications that came with them. Our team also needed to learn how to deliver an appropriate
+Readme file that abided by the Semantic Versioning schema. When writing the code for LumberJack Notes, we began by
+distributing the workload amongst two teams (User Interface and Note-Taking Environment) Each specialized team could
+focus on that specific area of the software, and at the conclusion of every meeting the changes were relayed to the
+entire team. Using this approach allowed us to stay on schedule while still keeping every team member informed.
+The first release tested the teams organization skills since we were dealing with so many files.
+Time management also became an issue which resulted in an extensive crunch the day of the deadline.
+Having been through this, we know what to avoid in our next release.
 
 ## 10. Demo
+
+![Demo Video](./images/demo.mp4)
