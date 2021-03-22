@@ -52,6 +52,9 @@ understanding of the client-server architecture in Lumberjack Notes.
 
 ## 5. Deployment
 
+Our team decided not to include any client-server code for the first implementation of our MVP. Since Lumberjack Notes
+does not contain any web-based services yet, we did not have a Docker container to deploy on AWS. Thus, we found it
+unnecessary to include a Docker link in this deliverable.
 
 ## 6. Licensing
 
