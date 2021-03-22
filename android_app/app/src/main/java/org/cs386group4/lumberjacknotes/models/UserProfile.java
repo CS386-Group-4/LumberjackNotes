@@ -5,7 +5,7 @@ public class UserProfile
     private String[] personalDetails;
     private String[] enrolledGroups;
     // Declares max amount of notes that can be created by a user
-    public final int maxWrittenNotes = 1000000;
+    public final int maxWrittenNotes = 100;
     private Notes[] writtenNotes = new Notes[maxWrittenNotes];
 
     /**
@@ -26,6 +26,24 @@ public class UserProfile
         return writtenNotes;
     }
 
+    /**
+     * This function creates a new Notes object and appends it to the writtenNotes array.
+     * @param newNote Name given to the note by the user
+     */
+    public void addNote(Notes newNote)
+    {
+        int index;
+
+        // This loop appends the new note to the array of written notes
+        for(index = 0; index < writtenNotes.length; index++)
+        {
+            if(writtenNotes[index] == null)
+            {
+                writtenNotes[index] = newNote;
+                break;
+            }
+        }
+    }
 
     public void editProfile()
     {

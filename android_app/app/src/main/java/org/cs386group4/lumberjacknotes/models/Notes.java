@@ -2,6 +2,7 @@ package org.cs386group4.lumberjacknotes.models;
 
 import java.util.Random;
 import java.lang.String;
+import java.util.UUID;
 
 public class Notes
 {
@@ -24,39 +25,15 @@ public class Notes
         // This will be the default name for notes not given a name
         name = "Untitled Note";
         // This will be the default contents of the note body
-        content = " ";
+        content = "";
         // This will be the default for the accessControls of a Notes object (true == public; false == private)
         accessControls = false;
         // This will be the default uniqueID for a Notes object that has not been assigned a truly uniqueID
         uniqueID = -1;
         // This will be the default fileType when exporting a note
         fileType = "pdf";
-    }
 
-    /**
-     * This function creates a new Notes object and appends it to the writtenNotes array.
-     * @param noteName Name given to the note by the user
-     */
-    public void createNote(String noteName)
-    {
-        // Creates new instance of Notes object
-        Notes newNote = new Notes(userProfile);
-        // Sets the new notes name to the name given to it by the user
-        newNote.name = noteName;
-        // Calls the createUniqueID() function to assign the note with a uniqueID
-        newNote.uniqueID = createUniqueID();
-        // Declares looping variable
-        int index;
-
-        // This loop appends the new note to the array of written notes
-        for(index = 0; index < userProfile.getWrittenNotes().length - 1; index++)
-        {
-            if(userProfile.getWrittenNotes()[index] == null)
-            {
-                userProfile.getWrittenNotes()[index] = newNote;
-                break;
-            }
-        }
+        userProfile.addNote(this);
     }
 
     /**
@@ -221,7 +198,7 @@ public class Notes
     public Notes[] searchNotes(String searchString)
     {
         // New array of Notes objects that will hold the notes with names that match our search string.
-        Notes searchedNotes[] = new Notes[userProfile.maxWrittenNotes];
+        Notes[] searchedNotes = new Notes[userProfile.maxWrittenNotes];
 
         // Declares looping variables
         int index;
