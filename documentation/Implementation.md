@@ -69,6 +69,21 @@ We adopted the MIT license for its simplicity and permissibility, allowing other
 
 ## 8. Look & feel
 
+During our interviews, we concluded interviewees wanted a simple and intuitive UI. We designed a simple log-in page
+that offers a familiar design. The note-taking environment provides users with a clean and unintrusive design.
+
+![Dark Mode Log In](./images/Deliverable4DarkModeLogIn.png)
+
+At the top of the note-taking environment, the users can find a search and user profile button that will later allow
+users to quickly search their notes and review their profile. At the bottom of the environment, users will be able to
+customize and use their favorite editing tools in a later update.
+
+![Dark Mode No Typing View](./images/Deliverable4DarkModeNoTypingView.png)
+
+When users begin to type their notes, we have designed the toolbar to relocate above the keyboard for easy access. This
+will allow users to continue typing while also using editing tools.
+
+![Light Mode Typing View](./images/Deliverable4LightModeTypingView.png)
 
 ## 9. Lessons learned
 
@@ -86,4 +101,3 @@ next release.
 ## 10. Demo
 
 Demo Link: https://youtu.be/UkBadrHhnOg
-
