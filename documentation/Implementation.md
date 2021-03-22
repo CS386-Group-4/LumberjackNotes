@@ -52,11 +52,16 @@ understanding of the client-server architecture in Lumberjack Notes.
 
 ## 5. Deployment
 
+Our team decided not to include any client-server code for the first implementation of our MVP. Since Lumberjack Notes
+does not contain any web-based services yet, we did not have a Docker container to deploy on AWS. Thus, we found it
+unnecessary to include a Docker link in this deliverable.
 
 ## 6. Licensing
+
 We adopted the MIT license for its simplicity and permissibility, allowing others to modify and redistribute our code freely.
 
 ## 7. Readme File
+
 - [README.md](../README.md)
 - [CONTRIBUTING.md](../CONTRIBUTING.md)
 - [CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md)
@@ -64,8 +69,35 @@ We adopted the MIT license for its simplicity and permissibility, allowing other
 
 ## 8. Look & feel
 
+During our interviews, we concluded interviewees wanted a simple and intuitive UI. We designed a simple log-in page
+that offers a familiar design. The note-taking environment provides users with a clean and unintrusive design.
+
+![Dark Mode Log In](./images/Deliverable4DarkModeLogIn.png)
+
+At the top of the note-taking environment, the users can find a search and user profile button that will later allow
+users to quickly search their notes and review their profile. At the bottom of the environment, users will be able to
+customize and use their favorite editing tools in a later update.
+
+![Dark Mode No Typing View](./images/Deliverable4DarkModeNoTypingView.png)
+
+When users begin to type their notes, we have designed the toolbar to relocate above the keyboard for easy access. This
+will allow users to continue typing while also using editing tools.
+
+![Light Mode Typing View](./images/Deliverable4LightModeTypingView.png)
 
 ## 9. Lessons learned
 
+Over the course of the first release, our team gained knowledge in several different areas of software development.
+When devising our licensing agreement, the team had to research the various types of software licensing agreements as
+well as the legal ramifications that came with them. Our team also needed to learn how to deliver an appropriate README
+file that abided by the Semantic Versioning schema. When writing the code for Lumberjack Notes, we began by distributing
+the workload amongst two teams (User Interface and Note-Taking Environment). Each specialized team could focus on that
+specific area of the software, and at the conclusion of every meeting the changes were relayed to the entire team.
+Using this approach allowed us to stay on schedule while still keeping every team member informed. The first release
+tested the teams organization skills since we were dealing with so many files. Time management also became an issue
+which resulted in an extensive crunch the day of the deadline. Having been through this, we know what to avoid in our
+next release.
 
 ## 10. Demo
+
+Demo Link: https://youtu.be/UkBadrHhnOg
