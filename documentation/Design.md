@@ -14,7 +14,11 @@ While Lumberjack Notes is still in early development, the app aims to provide a 
 interface, as well as an unobtrusive note-taking environment. The user can edit and rearrange the tools in the toolbar
 to their liking. These tools can also be utilized while typing so that users note-taking experience is more fluid. The
 user will also have easy access to a search function that will allow them to quickly view other notes they have
-written. They will also be able to quickly access or modify their profile. 
+written. They will also be able to quickly access or modify their profile.
+
+GitHub: https://github.com/CS386-Group-4/LumberjackNotes
+
+Trello: https://trello.com/b/3lbd1jw9/cs-386-notes-app
 
 ## 2. Architecture
 
