@@ -31,7 +31,7 @@ simplicity and effectiveness in structuring the code in an organized and extensi
 
 ## 3. Class diagram
 
-
+![UML Diagram](./images/Deliverable_5_Design_UML_Diagram.png)
 
 ## 4. Sequence diagram
 
