@@ -35,6 +35,19 @@ simplicity and effectiveness in structuring the code in an organized and extensi
 
 ## 4. Sequence diagram
 
+**Use Case**: Take Notes  
+**Actor**: User  
+**Description**: The user creates a page where they are able to take notes  
+**Preconditions**: The user has created an account on the platform  
+**Post-conditions**: The user should have a workspace where they can take and edit notes  
+**Main Flow**:
+1. The user selects a workspace
+2. The user can write or draw notes
+3. The user should be able to save their notes and come back to them at a later date
+
+**Alternate Flow**:
+- None
+
 
 
 ## 5. Design Patterns
