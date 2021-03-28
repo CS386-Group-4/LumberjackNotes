@@ -22,7 +22,12 @@ Trello: https://trello.com/b/3lbd1jw9/cs-386-notes-app
 
 ## 2. Architecture
 
+The architecture we implemented for Lumberjack Notes is MVC (Model–View–Controller). The model layer describes the data
+structure to hold information, the view layer contains the representation of the user interface presented to the user,
+and the controller layer accepts user input and controls model data. We used this architecture for our app for its
+simplicity and effectiveness in structuring the code in an organized and extensible manner.
 
+![Architecture](./images/Deliverable_5_Design_Architecture.png)
 
 ## 3. Class diagram
 
