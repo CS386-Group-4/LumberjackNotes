@@ -52,6 +52,21 @@ simplicity and effectiveness in structuring the code in an organized and extensi
 
 ## 5. Design Patterns
 
+### Bridge Design Pattern (Structural)
 
+**Insert explanation here OR**
+
+![Bridge Design Pattern UML Diagram](./images/D5_Bridge_Design_Pattern.png)
+
+**insert the explanation here**
+
+
+### Singleton Design Pattern (Creational)
+
+**Insert explanation here OR**
+
+![Singleton Design Pattern UML Diagram](./images/D5_Singleton_Design_Pattern.png)
+
+**insert the explanation here**
 
 ## 6. Design Principles
