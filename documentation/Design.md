@@ -35,6 +35,8 @@ simplicity and effectiveness in structuring the code in an organized and extensi
 
 ## 4. Sequence diagram
 
+![Sequence Diagram](./images/Deliverable_5_Design_UML_Diagram.png)
+
 **Use Case**: Take Notes  
 **Actor**: User  
 **Description**: The user creates a page where they are able to take notes  
@@ -47,8 +49,6 @@ simplicity and effectiveness in structuring the code in an organized and extensi
 
 **Alternate Flow**:
 - None
-
-
 
 ## 5. Design Patterns
 
