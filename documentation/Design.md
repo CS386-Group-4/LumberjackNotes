@@ -77,3 +77,21 @@ The Notes class can be found [here](../android_app/app/src/main//java/org/cs386g
 The UserProfile class can be found [here](../android_app/app/src/main//java/org/cs386group4/lumberjacknotes/models/UserProfile.java).
 
 ## 6. Design Principles
+
+### S: Single responsibility principle (SRP)
+
+![SRP Example UML Diagram](./D5_SRP_Example.png)
+
+### O: Open/closed principle (OCP)
+
+![OCP Example UML Diagram](./D5_OCP_Example.png)
+
+### L: Liskov substitution principle (LSP)
+
+
+
+### I: Interface segregation principle (ISP)
+
+
+
+### D: Dependency inversion principle (DIP)
