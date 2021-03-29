@@ -59,9 +59,9 @@ since there can only be one user of the app at a time.
 
 ![Bridge Design Pattern UML Diagram](./images/D5_Bridge_Design_Pattern.png)
 
-The Notes class can be found [here](././android_app/app/src/main//java/orf/cs386group4/lumberjacknotes/models/Notes.java).
+The Notes class can be found [here](../android_app/app/src/main//java/orf/cs386group4/lumberjacknotes/models/Notes.java).
 
-The UserProfile class can be found [here](././android_app/app/src/main//java/orf/cs386group4/lumberjacknotes/models/UserProfile.java).
+The UserProfile class can be found [here](../android_app/app/src/main//java/orf/cs386group4/lumberjacknotes/models/UserProfile.java).
 
 ### Singleton Design Pattern (Creational)
 
@@ -70,10 +70,10 @@ separates the responsibilities between user data management and note data manage
 
 ![Singleton Design Pattern UML Diagram](./images/D5_Singleton_Design_Pattern.png)
 
-The LoginActivity class can be found: [here](././android_app/app/src/main//java/orf/cs386group4/lumberjacknotes/ui/LoginActivity.java).
+The LoginActivity class can be found: [here](../android_app/app/src/main//java/orf/cs386group4/lumberjacknotes/ui/LoginActivity.java).
 
-The Notes class can be found [here](././android_app/app/src/main//java/orf/cs386group4/lumberjacknotes/models/Notes.java).
+The Notes class can be found [here](../android_app/app/src/main//java/orf/cs386group4/lumberjacknotes/models/Notes.java).
 
-The UserProfile class can be found [here](././android_app/app/src/main//java/orf/cs386group4/lumberjacknotes/models/UserProfile.java).
+The UserProfile class can be found [here](../android_app/app/src/main//java/orf/cs386group4/lumberjacknotes/models/UserProfile.java).
 
 ## 6. Design Principles
