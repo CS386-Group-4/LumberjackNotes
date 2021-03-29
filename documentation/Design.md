@@ -54,19 +54,17 @@ simplicity and effectiveness in structuring the code in an organized and extensi
 
 ### Bridge Design Pattern (Structural)
 
-**Insert explanation here OR**
+LoginActivity will instantiate one instance of UserProfile, which will be used across the app. This makes logical sense
+since there can only be one user of the app at a time.
 
 ![Bridge Design Pattern UML Diagram](./images/D5_Bridge_Design_Pattern.png)
-
-**insert the explanation here**
 
 
 ### Singleton Design Pattern (Creational)
 
-**Insert explanation here OR**
+The user's notes are abstracted away to an array of Notes objects, which is then used in the UserProfile object. This
+separates the responsibilities between user data management and note data management.
 
 ![Singleton Design Pattern UML Diagram](./images/D5_Singleton_Design_Pattern.png)
-
-**insert the explanation here**
 
 ## 6. Design Principles
