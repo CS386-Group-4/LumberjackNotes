@@ -82,16 +82,22 @@ The UserProfile class can be found [here](../android_app/app/src/main//java/org/
 
 ![SRP Example UML Diagram](./images/D5_SRP_Example.png)
 
+Insert Explanation Here
+
 ### O: Open/closed principle (OCP)
 
 ![OCP Example UML Diagram](./images/D5_OCP_Example.png)
 
+Insert Explanation Here
+
 ### L: Liskov substitution principle (LSP)
 
-
+Insert Explanation Here
 
 ### I: Interface segregation principle (ISP)
 
-
+Insert Explanation Here
 
 ### D: Dependency inversion principle (DIP)
+
+Insert Explanation Here
