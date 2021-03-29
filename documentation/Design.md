@@ -82,22 +82,26 @@ The UserProfile class can be found [here](../android_app/app/src/main//java/org/
 
 ![SRP Example UML Diagram](./images/D5_SRP_Example.png)
 
-Insert Explanation Here
+The design we implemented observes the Single responsibility principle. The Tutorial class has the sole responsibility
+of displaying information to the user about the application.
 
 ### O: Open/closed principle (OCP)
 
 ![OCP Example UML Diagram](./images/D5_OCP_Example.png)
 
-Insert Explanation Here
+Our design also observes the Open/closed principle. The Tools class is extendable but closed for modification.
 
 ### L: Liskov substitution principle (LSP)
 
-Insert Explanation Here
+The Liskov Substitution Principle states that every subclass should be substitutable for their parent class. Our design
+does not use any subclasses so far, so this principle does not yet apply.
 
 ### I: Interface segregation principle (ISP)
 
-Insert Explanation Here
+The Interface Segregation Principle states that a client should never be forced to implement an interface or depend on
+methods that they do not use.
 
 ### D: Dependency inversion principle (DIP)
 
-Insert Explanation Here
+The Dependency Inversion Principle states that entities must depend on abstractions not concretions, which allows
+decoupling. Since we don’t have any code interfaces yet, this principle does not apply.
