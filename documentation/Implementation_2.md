@@ -10,6 +10,10 @@ their notes with their colleagues. Our application aims to provide a user-friend
 note-taking environment. Users will have a streamlined experience to save and access notes. Users will also be able to
 utilize note taking tools with the text editor at the same time making workflow more fluid.
 
+GitHub: https://github.com/CS386-Group-4/LumberjackNotes
+
+Trello: https://trello.com/b/3lbd1jw9/cs-386-notes-app
+
 ## 2. Implemented requirements
 
 1. User Story: “As a college student, I want to have a streamlined experience to easily access and save notes.”  
