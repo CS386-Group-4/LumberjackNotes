@@ -89,7 +89,7 @@ public class WorkspaceController
         int index;
         File file;
         BufferedWriter writer;
-        Notes tmpNote = dummyUserProfile.getWrittenNotes()[0];
+        Notes tmpNote = dummyUserProfile.getWrittenNotes().get(0);
 
         index = 0;
         while (tmpNote != null)
@@ -111,7 +111,7 @@ public class WorkspaceController
 
             // Move to next note
             index++;
-            tmpNote = dummyUserProfile.getWrittenNotes()[index];
+            tmpNote = dummyUserProfile.getWrittenNotes().get(index);
         }
     }
 
