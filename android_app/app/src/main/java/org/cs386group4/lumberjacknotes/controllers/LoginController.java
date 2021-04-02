@@ -1,15 +1,14 @@
 package org.cs386group4.lumberjacknotes.controllers;
 
 import android.content.Intent;
-import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.cs386group4.lumberjacknotes.R;
 import org.cs386group4.lumberjacknotes.ui.LoginActivity;
 import org.cs386group4.lumberjacknotes.ui.MainActivity;
+import org.cs386group4.lumberjacknotes.ui.NotesListActivity;
 
 public class LoginController
 {
@@ -27,6 +26,7 @@ public class LoginController
         {
             // TODO: Handle login
             Intent intent = new Intent(loginActivity, MainActivity.class);
+            //Intent intent = new Intent(loginActivity, NotesListActivity.class);
             loginActivity.startActivity(intent);
         });
     }
