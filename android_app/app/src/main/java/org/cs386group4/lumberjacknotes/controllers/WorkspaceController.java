@@ -1,8 +1,5 @@
 package org.cs386group4.lumberjacknotes.controllers;
 
-import android.util.Log;
-import android.widget.Toast;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.cs386group4.lumberjacknotes.R;
@@ -86,32 +83,25 @@ public class WorkspaceController
 
     public void saveNoteToStorage(MainActivity mainActivity)
     {
-        int index;
         File file;
         BufferedWriter writer;
-        Notes tmpNote = dummyUserProfile.getWrittenNotes().get(0);
 
-        index = 0;
-        while (tmpNote != null)
+        for (Notes curNote : dummyUserProfile.getWrittenNotes())
         {
             // Create File object for new note file
-            file = new File(mainActivity.getFilesDir(), Integer.toString(tmpNote.getUniqueID()));
+            file = new File(mainActivity.getFilesDir(), Integer.toString(curNote.getUniqueID()));
 
             // Write the contents of the Notes objects to their own files
             try
             {
                 writer = new BufferedWriter(new FileWriter(file));
-                writer.write(tmpNote.getContent());
+                writer.write(curNote.getContent());
                 writer.close();
             }
             catch (IOException e)
             {
                 e.printStackTrace();
             }
-
-            // Move to next note
-            index++;
-            tmpNote = dummyUserProfile.getWrittenNotes().get(index);
         }
     }
 
