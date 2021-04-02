@@ -19,6 +19,17 @@ public class LoginActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // Initialize login controller
+        new LoginController(this);
+
+        initStatusBar();
+    }
+
+    /**
+     * Set up the status bar theme
+     */
+    private void initStatusBar()
+    {
         // Match status bar color to background if at least Android M
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         {
@@ -31,8 +42,5 @@ public class LoginActivity extends AppCompatActivity
                 getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             }
         }
-
-        // Initialize login controller
-        new LoginController(this);
     }
 }
