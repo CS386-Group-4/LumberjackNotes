@@ -1,11 +1,17 @@
 package org.cs386group4.lumberjacknotes.models;
 
+import org.cs386group4.lumberjacknotes.ui.MainActivity;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.util.Random;
 import java.lang.String;
 import java.util.UUID;
 import java.util.ArrayList;
 
-public class Notes
+public class Notes implements Serializable // Testing Serializable for Data Storage
 {
     // Declares global variables
     private UserProfile userProfile;
@@ -128,6 +134,31 @@ public class Notes
     {
         return accessControls;
     }
+
+//    /**
+//     *
+//     * @param mainActivity
+//     */
+//    public void loadNotes(MainActivity mainActivity)
+//    {
+//        try
+//        {
+//            // Opens file where the UserProfile will be stored locally
+//            FileInputStream fileInputStream = mainActivity.openFileInput("UserProfile.txt");
+//            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+//            // Opens UserProfile object from file and closes read access
+//            userProfile = (UserProfile) objectInputStream.readObject();
+//            // TODO: May remove this current note assignment elsewhere once implementations supports multiple notes
+//            currentNote = userProfile.getWrittenNotes().get(0);
+//            objectInputStream.close();
+//            fileInputStream.close();
+//        }
+//        catch(IOException | ClassNotFoundException e)
+//        {
+//            e.printStackTrace();
+//        }
+//
+//    }
 
     /**
      * This function searches through the writtenNotes arrayList for notes that have a matching name to the

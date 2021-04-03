@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity
 {
     WorkspaceController workspaceController;
 
+//    Save save;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity
         // Initialize workspace controller
         workspaceController = new WorkspaceController(this);
 
+//        save = new Save();
+
         // Initialize note taking controller
         ViewGroup notetakingRoot = findViewById(R.id.notetaking_root);
         new NoteTakingController(workspaceController, notetakingRoot);
@@ -45,6 +49,7 @@ public class MainActivity extends AppCompatActivity
     protected void onDestroy()
     {
         // TODO: Save notes cloud
+//        save.saveNoteToStorage(this);
         workspaceController.saveNoteToStorage(this);
 
         super.onDestroy();

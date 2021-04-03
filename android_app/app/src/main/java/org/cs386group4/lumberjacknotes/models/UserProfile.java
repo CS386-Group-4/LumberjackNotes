@@ -1,8 +1,9 @@
 package org.cs386group4.lumberjacknotes.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class UserProfile
+public class UserProfile implements Serializable
 {
     private String[] personalDetails;
     private String[] enrolledGroups;
