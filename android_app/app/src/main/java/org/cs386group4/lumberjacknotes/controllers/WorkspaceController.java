@@ -1,19 +1,26 @@
 package org.cs386group4.lumberjacknotes.controllers;
 
+import android.content.Context;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.cs386group4.lumberjacknotes.R;
 import org.cs386group4.lumberjacknotes.models.Notes;
+import org.cs386group4.lumberjacknotes.models.Save;
 import org.cs386group4.lumberjacknotes.models.UserProfile;
 import org.cs386group4.lumberjacknotes.ui.MainActivity;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class WorkspaceController
 {
@@ -45,65 +52,42 @@ public class WorkspaceController
 
     private void loadNotes(MainActivity mainActivity)
     {
-        String[] noteFilenames = mainActivity.fileList();
-        File currentFile;
-        BufferedReader reader;
-        StringBuilder fileContent;
-        String line;
-
-        // Loop through all note files in app directory
-        for (String noteFilename : noteFilenames)
+        try
         {
-            try
-            {
-                // Get the file corresponding to the current filename
-                currentFile = new File(mainActivity.getFilesDir(), noteFilename);
-                reader = new BufferedReader(new FileReader(currentFile));
-                fileContent = new StringBuilder();
-
-                // Read all lines from each file into a StringBuilder
-                int lineIndex = 0;
-                while ((line = reader.readLine()) != null)
-                {
-                    fileContent.append(line);
-                }
-
-                reader.close();
-
-                // Load new Notes object with content from file
-                currentNote = new Notes(dummyUserProfile);
-                currentNote.setName(noteFilename);
-                currentNote.setContent(fileContent.toString());
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
+            // Opens file where the UserProfile will be stored locally
+            FileInputStream fileInputStream = mainActivity.openFileInput("UserProfile.txt");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            // Opens UserProfile object from file and closes read access
+            dummyUserProfile = (UserProfile) objectInputStream.readObject();
+            // TODO: May remove this current note assignment eslewhere once implementations supports multiple notes
+            currentNote = dummyUserProfile.getWrittenNotes().get(0);
+            objectInputStream.close();
+            fileInputStream.close();
         }
+        catch(IOException | ClassNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
     public void saveNoteToStorage(MainActivity mainActivity)
     {
-        File file;
-        BufferedWriter writer;
-
-        for (Notes curNote : dummyUserProfile.getWrittenNotes())
+        try
         {
-            // Create File object for new note file
-            file = new File(mainActivity.getFilesDir(), Integer.toString(curNote.getUniqueID()));
-
-            // Write the contents of the Notes objects to their own files
-            try
-            {
-                writer = new BufferedWriter(new FileWriter(file));
-                writer.write(curNote.getContent());
-                writer.close();
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
+            // Creates file where the UserProfile will be stored locally
+            FileOutputStream fileOutputStream = mainActivity.openFileOutput("UserProfile.txt", Context.MODE_PRIVATE);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            // Writes UserProfile object to file and closes write access
+            objectOutputStream.writeObject(dummyUserProfile);
+            objectOutputStream.close();
+            fileOutputStream.close();
         }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
     public Notes getCurrentNote()
