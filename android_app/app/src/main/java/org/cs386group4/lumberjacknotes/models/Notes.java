@@ -51,7 +51,7 @@ public class Notes implements Serializable // Testing Serializable for Data Stor
         // Creates a new Random Object for generating a uniqueID
         Random randInt = new Random();
         // Sets the bound for the highest possible generated uniqueID to 100,000 (max amount of written notes)
-        final int maxUniqueIDNumber = userProfile.maxWrittenNotes;
+        final int maxUniqueIDNumber = UserProfile.maxWrittenNotes;
         // Assigns the uniqueID with a random number between 0 and 99,999
         int uniqueID = randInt.nextInt(maxUniqueIDNumber);
         int index;
@@ -82,7 +82,8 @@ public class Notes implements Serializable // Testing Serializable for Data Stor
 
     /**
      * TODO
-     * @param fileType
+     * This method allows the user to export their note as a file
+     * @param fileType Type of file to be exported
      */
     public void exportNote(String fileType)
     {
@@ -215,8 +216,8 @@ public class Notes implements Serializable // Testing Serializable for Data Stor
     }
 
     /**
-     *
-     * @param uniqueID
+     * Setter method that sets the uniqueID of a note to that of the parameter
+     * @param uniqueID New note uniqueID
      */
     public void setUniqueID(int uniqueID)
     {

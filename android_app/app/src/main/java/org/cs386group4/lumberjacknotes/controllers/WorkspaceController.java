@@ -26,7 +26,8 @@ public class WorkspaceController
 {
     Notes currentNote;
 
-    UserProfile dummyUserProfile = new UserProfile();
+//    UserProfile dummyUserProfile = new UserProfile();
+    UserProfile dummyUserProfile = UserProfile.getInstance();
 
     public WorkspaceController(MainActivity mainActivity)
     {
@@ -59,7 +60,7 @@ public class WorkspaceController
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             // Opens UserProfile object from file and closes read access
             dummyUserProfile = (UserProfile) objectInputStream.readObject();
-            // TODO: May remove this current note assignment eslewhere once implementations supports multiple notes
+            // TODO: May remove this current note assignment elsewhere once implementations supports multiple notes
             currentNote = dummyUserProfile.getWrittenNotes().get(0);
             objectInputStream.close();
             fileInputStream.close();

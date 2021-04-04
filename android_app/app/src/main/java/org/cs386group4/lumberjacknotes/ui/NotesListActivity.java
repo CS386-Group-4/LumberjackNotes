@@ -24,7 +24,8 @@ public class NotesListActivity extends AppCompatActivity
 
     private void testNotesAdapter()
     {
-        UserProfile dummyUserProfile = new UserProfile();
+//        UserProfile dummyUserProfile = new UserProfile();
+        UserProfile dummyUserProfile = UserProfile.getInstance();
         new Notes(dummyUserProfile);
         new Notes(dummyUserProfile);
         new Notes(dummyUserProfile);
