@@ -1,6 +1,8 @@
 package org.cs386group4.lumberjacknotes.models;
 
-public class Save
+import java.io.Serializable;
+
+public class Save implements Serializable
 {
     private boolean savedToCloud = false;
     private boolean successfulSave = false;
@@ -14,4 +16,7 @@ public class Save
     {
 
     }
+
+
+
 }
