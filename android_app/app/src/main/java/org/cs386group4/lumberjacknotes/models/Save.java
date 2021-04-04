@@ -1,9 +1,5 @@
 package org.cs386group4.lumberjacknotes.models;
 
-
-import java.io.Serializable;
-
-public class Save implements Serializable
 import android.content.Context;
 
 import org.cs386group4.lumberjacknotes.ui.MainActivity;
@@ -15,7 +11,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class Save
-
 {
     private boolean savedToCloud = false;
     private boolean successfulSave = false;
@@ -36,9 +31,6 @@ public class Save
     {
 
     }
-
-
-
 
 //    public void loadNotes(MainActivity mainActivity)
 //    {
@@ -77,6 +69,5 @@ public class Save
 //            e.printStackTrace();
 //        }
 //    }
-
 
 }
