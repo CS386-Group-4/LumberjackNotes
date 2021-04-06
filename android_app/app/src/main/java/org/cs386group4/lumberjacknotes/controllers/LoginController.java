@@ -38,7 +38,6 @@ public class LoginController
         loginButton.setOnClickListener(view ->
         {
             // TODO: Handle real login from cloud database
-            //Intent intent = new Intent(loginActivity, MainActivity.class);
             Intent intent = new Intent(loginActivity, NotesListActivity.class);
             loginActivity.startActivity(intent);
         });
