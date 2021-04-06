@@ -12,6 +12,7 @@ import com.google.android.material.textview.MaterialTextView;
 
 import org.cs386group4.lumberjacknotes.R;
 import org.cs386group4.lumberjacknotes.models.Notes;
+import org.cs386group4.lumberjacknotes.models.UserProfile;
 import org.cs386group4.lumberjacknotes.ui.MainActivity;
 
 import java.util.Arrays;
@@ -63,10 +64,11 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder>
         holder.getNoteItemRoot().setOnClickListener(view ->
         {
             Intent intent = new Intent(holder.getNoteItemRoot().getContext(), MainActivity.class);
+            intent.putExtra("note_position", position);
             holder.getNoteItemRoot().getContext().startActivity(intent);
         });
 
-//        contentTextView.setText("Note item #" + position);
+        contentTextView.setText(UserProfile.getInstance().getWrittenNotes().get(position).getContent());
     }
 
     @NonNull

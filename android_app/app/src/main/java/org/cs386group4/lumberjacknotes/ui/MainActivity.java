@@ -35,8 +35,10 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         this.invalidateOptionsMenu();
 
+        int notePosition = getIntent().getIntExtra("note_poisiton", 0);
+
         // Initialize workspace controller
-        workspaceController = new WorkspaceController(this);
+        workspaceController = new WorkspaceController(this, notePosition);
 
 //        save = new Save();
 

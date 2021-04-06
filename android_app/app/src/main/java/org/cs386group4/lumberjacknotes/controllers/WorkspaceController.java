@@ -29,16 +29,12 @@ public class WorkspaceController
 //    UserProfile dummyUserProfile = new UserProfile();
     UserProfile dummyUserProfile = UserProfile.getInstance();
 
-    public WorkspaceController(MainActivity mainActivity)
+    public WorkspaceController(MainActivity mainActivity, int notePosition)
     {
         loadNotes(mainActivity);
         initNewNoteButton(mainActivity);
 
-        // If no notes were previously created and written to disk, create a blank note
-        if (currentNote == null)
-        {
-            currentNote = new Notes(dummyUserProfile);
-        }
+        currentNote = dummyUserProfile.getWrittenNotes().get(notePosition);
     }
 
     private void initNewNoteButton(MainActivity mainActivity)
@@ -48,6 +44,8 @@ public class WorkspaceController
         newNoteButton.setOnClickListener(view ->
         {
             // TODO: Create new note
+            new Notes(UserProfile.getInstance());
+            System.out.println(UserProfile.getInstance().getWrittenNotes().size());
         });
     }
 
@@ -60,8 +58,6 @@ public class WorkspaceController
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             // Opens UserProfile object from file and closes read access
             dummyUserProfile = (UserProfile) objectInputStream.readObject();
-            // TODO: May remove this current note assignment elsewhere once implementations supports multiple notes
-            currentNote = dummyUserProfile.getWrittenNotes().get(0);
             objectInputStream.close();
             fileInputStream.close();
         }
