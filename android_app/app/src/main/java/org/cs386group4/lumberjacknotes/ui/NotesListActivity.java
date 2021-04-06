@@ -24,15 +24,22 @@ public class NotesListActivity extends AppCompatActivity
 
     private void testNotesAdapter()
     {
-//        UserProfile dummyUserProfile = new UserProfile();
-        UserProfile dummyUserProfile = UserProfile.getInstance();
-        new Notes(dummyUserProfile);
-        new Notes(dummyUserProfile);
-        new Notes(dummyUserProfile);
-        new Notes(dummyUserProfile);
-        new Notes(dummyUserProfile);
+//////        UserProfile dummyUserProfile = new UserProfile();
+////        UserProfile dummyUserProfile = UserProfile.getInstance();
+////        new Notes(dummyUserProfile);
+////        new Notes(dummyUserProfile);
+////        new Notes(dummyUserProfile);
+////        new Notes(dummyUserProfile);
+////        new Notes(dummyUserProfile);
 
-        NotesAdapter notesAdapter = new NotesAdapter(dummyUserProfile.getWrittenNotes());
+        if(UserProfile.getInstance().getWrittenNotes().size() == 0)
+        {
+            new Notes(UserProfile.getInstance()).setContent("First note");
+        }
+
+        NotesAdapter notesAdapter = new NotesAdapter(UserProfile.getInstance().getWrittenNotes());
+
+        System.out.println(UserProfile.getInstance().getWrittenNotes().size());
 
         RecyclerView notesList = findViewById(R.id.notes_list);
         notesList.setLayoutManager(new LinearLayoutManager(this));

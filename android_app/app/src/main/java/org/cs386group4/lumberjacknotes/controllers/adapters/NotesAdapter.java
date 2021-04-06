@@ -1,5 +1,6 @@
 package org.cs386group4.lumberjacknotes.controllers.adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import com.google.android.material.textview.MaterialTextView;
 
 import org.cs386group4.lumberjacknotes.R;
 import org.cs386group4.lumberjacknotes.models.Notes;
+import org.cs386group4.lumberjacknotes.ui.MainActivity;
 
 import java.util.Arrays;
 import java.util.List;
@@ -58,7 +60,13 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder>
 
         Notes currentNotes = notesList.get(position);
 
-        contentTextView.setText("Note item #" + position);
+        holder.getNoteItemRoot().setOnClickListener(view ->
+        {
+            Intent intent = new Intent(holder.getNoteItemRoot().getContext(), MainActivity.class);
+            holder.getNoteItemRoot().getContext().startActivity(intent);
+        });
+
+//        contentTextView.setText("Note item #" + position);
     }
 
     @NonNull
@@ -77,6 +85,8 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder>
      */
     public static class ViewHolder extends RecyclerView.ViewHolder
     {
+        private final View noteItemRoot;
+
         /**
          * Variable that stores notes content in a way that can manipulated by RecyclerView
          */
@@ -90,7 +100,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder>
         public ViewHolder(@NonNull View noteItemRoot)
         {
             super(noteItemRoot);
-
+            this.noteItemRoot = noteItemRoot;
             noteContent = noteItemRoot.findViewById(R.id.note_content);
         }
 
@@ -101,6 +111,12 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder>
         public MaterialTextView getContentTextView()
         {
             return noteContent;
+        }
+
+        @NonNull
+        public View getNoteItemRoot()
+        {
+            return noteItemRoot;
         }
     }
 }
