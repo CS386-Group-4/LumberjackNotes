@@ -42,6 +42,8 @@ public class NotesListActivity extends AppCompatActivity
         System.out.println(UserProfile.getInstance().getWrittenNotes().size());
 
         RecyclerView notesList = findViewById(R.id.notes_list);
+
+        notesList.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         notesList.setLayoutManager(new LinearLayoutManager(this));
         notesList.setAdapter(notesAdapter);
     }
