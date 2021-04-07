@@ -34,7 +34,6 @@ public class NotesListActivity extends AppCompatActivity
     @Override
     protected void onResume()
     {
-        Log.e("NotesListActivity", "onResume()");
         super.onResume();
 
         // Reinitialize notes list whenever navigating back to this activity
