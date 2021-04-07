@@ -35,12 +35,10 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         this.invalidateOptionsMenu();
 
-        int notePosition = getIntent().getIntExtra("note_poisiton", 0);
+        int notePosition = getIntent().getIntExtra("note_position", 0);
 
         // Initialize workspace controller
         workspaceController = new WorkspaceController(this, notePosition);
-
-//        save = new Save();
 
         // Initialize note taking controller
         ViewGroup notetakingRoot = findViewById(R.id.notetaking_root);
@@ -51,7 +49,6 @@ public class MainActivity extends AppCompatActivity
     protected void onDestroy()
     {
         // TODO: Save notes cloud
-//        save.saveNoteToStorage(this);
         workspaceController.saveNoteToStorage(this);
 
         super.onDestroy();
