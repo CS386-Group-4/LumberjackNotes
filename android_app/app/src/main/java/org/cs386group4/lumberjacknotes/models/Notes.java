@@ -1,14 +1,8 @@
 package org.cs386group4.lumberjacknotes.models;
 
-import org.cs386group4.lumberjacknotes.ui.MainActivity;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.Random;
 import java.lang.String;
-import java.util.UUID;
 import java.util.ArrayList;
 
 public class Notes implements Serializable // Testing Serializable for Data Storage
@@ -51,7 +45,7 @@ public class Notes implements Serializable // Testing Serializable for Data Stor
         // Creates a new Random Object for generating a uniqueID
         Random randInt = new Random();
         // Sets the bound for the highest possible generated uniqueID to 100,000 (max amount of written notes)
-        final int maxUniqueIDNumber = UserProfile.maxWrittenNotes;
+        final int maxUniqueIDNumber = UserProfile.MAX_WRITTEN_NOTES;
         // Assigns the uniqueID with a random number between 0 and 99,999
         int uniqueID = randInt.nextInt(maxUniqueIDNumber);
         int index;

@@ -6,7 +6,8 @@ import java.util.ArrayList;
 public class UserProfile implements Serializable
 {
     // Declares max amount of notes that can be created by a user
-    public static final int maxWrittenNotes = 100000;
+    public static final int MAX_WRITTEN_NOTES = 100000;
+
     // Declares arrays for holding account information, as well as an ArrayList for storing user notes
     private String[] personalDetails;
     private String[] enrolledGroups;
