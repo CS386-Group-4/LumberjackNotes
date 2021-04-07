@@ -58,17 +58,17 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder>
     {
         // Get the MaterialTextView for the current ViewHolder item in the list
         MaterialTextView contentTextView = holder.getContentTextView();
-
-        Notes currentNotes = notesList.get(position);
+        Notes currentNote = notesList.get(position);
 
         holder.getNoteItemRoot().setOnClickListener(view ->
         {
+            // Start MainActivity and send the current note index
             Intent intent = new Intent(holder.getNoteItemRoot().getContext(), MainActivity.class);
             intent.putExtra("note_position", position);
             holder.getNoteItemRoot().getContext().startActivity(intent);
         });
 
-        contentTextView.setText(UserProfile.getInstance().getWrittenNotes().get(position).getContent());
+        contentTextView.setText(currentNote.getContent());
     }
 
     @NonNull
@@ -106,15 +106,18 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder>
             noteContent = noteItemRoot.findViewById(R.id.note_content);
         }
 
-        @NonNull
         /**
-         * getContentTextView() returns the content of each note instance
+         * @return the content view of each note instance
          */
+        @NonNull
         public MaterialTextView getContentTextView()
         {
             return noteContent;
         }
 
+        /**
+         * @return the root view of the layout
+         */
         @NonNull
         public View getNoteItemRoot()
         {

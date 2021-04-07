@@ -6,32 +6,21 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.cs386group4.lumberjacknotes.R;
 import org.cs386group4.lumberjacknotes.models.Notes;
-import org.cs386group4.lumberjacknotes.models.Save;
 import org.cs386group4.lumberjacknotes.models.UserProfile;
 import org.cs386group4.lumberjacknotes.ui.MainActivity;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class WorkspaceController
 {
     Notes currentNote;
 
-//    UserProfile dummyUserProfile = new UserProfile();
     UserProfile dummyUserProfile = UserProfile.getInstance();
 
     public WorkspaceController(MainActivity mainActivity, int notePosition)
     {
-        loadNotes(mainActivity);
         initNewNoteButton(mainActivity);
 
         currentNote = dummyUserProfile.getWrittenNotes().get(notePosition);
@@ -43,29 +32,9 @@ public class WorkspaceController
 
         newNoteButton.setOnClickListener(view ->
         {
-            // TODO: Create new note
-            new Notes(UserProfile.getInstance());
+            new Notes(UserProfile.getInstance()).setContent("New note");
             System.out.println(UserProfile.getInstance().getWrittenNotes().size());
         });
-    }
-
-    private void loadNotes(MainActivity mainActivity)
-    {
-        try
-        {
-            // Opens file where the UserProfile will be stored locally
-            FileInputStream fileInputStream = mainActivity.openFileInput("UserProfile.txt");
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            // Opens UserProfile object from file and closes read access
-            dummyUserProfile = (UserProfile) objectInputStream.readObject();
-            objectInputStream.close();
-            fileInputStream.close();
-        }
-        catch(IOException | ClassNotFoundException e)
-        {
-            e.printStackTrace();
-        }
-
     }
 
     public void saveNoteToStorage(MainActivity mainActivity)
