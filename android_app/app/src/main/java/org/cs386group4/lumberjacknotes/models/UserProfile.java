@@ -75,7 +75,7 @@ public class UserProfile implements Serializable
      * replaced with the Singleton instance.
      * @return Singleton instance of UserProfile object
      */
-    private Object readResolve()
+    protected Object readResolve()
     {
         instance.personalDetails = this.personalDetails;
         instance.enrolledGroups = this.enrolledGroups;
@@ -83,5 +83,4 @@ public class UserProfile implements Serializable
 
         return instance;
     }
-
 }
