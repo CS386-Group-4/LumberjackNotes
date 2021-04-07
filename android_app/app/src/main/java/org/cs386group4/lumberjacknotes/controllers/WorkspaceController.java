@@ -39,21 +39,17 @@ public class WorkspaceController
 
     public void saveNoteToStorage(MainActivity mainActivity)
     {
-        try
+        try (FileOutputStream fileOutputStream = mainActivity.openFileOutput("UserProfile.txt",
+                Context.MODE_PRIVATE);
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream))
         {
             // Creates file where the UserProfile will be stored locally
-            FileOutputStream fileOutputStream = mainActivity.openFileOutput("UserProfile.txt", Context.MODE_PRIVATE);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            // Writes UserProfile object to file and closes write access
             objectOutputStream.writeObject(dummyUserProfile);
-            objectOutputStream.close();
-            fileOutputStream.close();
         }
-        catch(IOException e)
+        catch (IOException e)
         {
             e.printStackTrace();
         }
-
     }
 
     public Notes getCurrentNote()

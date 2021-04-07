@@ -61,17 +61,14 @@ public class NotesListActivity extends AppCompatActivity
 
     private void loadUserProfile(@NonNull Context context)
     {
-        try
+
+        try (FileInputStream fileInputStream = context.openFileInput("UserProfile.txt");
+             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream))
         {
-            // Opens file where the UserProfile will be stored locally
-            FileInputStream fileInputStream = context.openFileInput("UserProfile.txt");
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            // Opens UserProfile object from file and closes read access
+            // Opens and reads file where the UserProfile will be stored locally
             objectInputStream.readObject();
-            objectInputStream.close();
-            fileInputStream.close();
         }
-        catch(IOException | ClassNotFoundException e)
+        catch (IOException | ClassNotFoundException e)
         {
             e.printStackTrace();
         }
