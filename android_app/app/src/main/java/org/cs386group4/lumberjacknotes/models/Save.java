@@ -19,7 +19,7 @@ public class Save
 
     public Save(UserProfile userProfile, Notes currentNote)
     {
-        userProfile = userProfile;
+        this.userProfile = userProfile;
     }
 
     public void autoCloudSave()
