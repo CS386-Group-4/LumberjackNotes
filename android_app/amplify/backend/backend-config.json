@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "LumberjackNotes": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
