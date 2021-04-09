@@ -2,8 +2,10 @@ package org.cs386group4.lumberjacknotes.controllers;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.amplifyframework.core.Amplify;
 import com.google.android.material.button.MaterialButton;
 
 import org.cs386group4.lumberjacknotes.R;
@@ -24,6 +26,12 @@ public class LoginController
         // Initialize login and register buttons
         initLoginButton(loginActivity);
         initRegisterButton(loginActivity);
+
+        // TODO: Cognito authentication
+        Amplify.Auth.fetchAuthSession(
+                result -> Log.i("AmplifyQuickstart", result.toString()),
+                error -> Log.e("AmplifyQuickstart", error.toString())
+        );
     }
 
     /**

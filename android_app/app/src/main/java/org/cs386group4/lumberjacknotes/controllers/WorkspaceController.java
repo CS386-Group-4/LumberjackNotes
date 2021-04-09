@@ -1,7 +1,7 @@
 package org.cs386group4.lumberjacknotes.controllers;
 
 import android.content.Context;
-import android.content.Intent;
+//import android.content.Intent;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -9,7 +9,7 @@ import org.cs386group4.lumberjacknotes.R;
 import org.cs386group4.lumberjacknotes.models.Notes;
 import org.cs386group4.lumberjacknotes.models.UserProfile;
 import org.cs386group4.lumberjacknotes.ui.MainActivity;
-import org.cs386group4.lumberjacknotes.ui.NotesListActivity;
+//import org.cs386group4.lumberjacknotes.ui.NotesListActivity;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -37,8 +37,8 @@ public class WorkspaceController
             new Notes(UserProfile.getInstance()).setContent("New note");
             System.out.println(UserProfile.getInstance().getWrittenNotes().size());
 
-            Intent intent = new Intent(mainActivity, MainActivity.class);
-            mainActivity.startActivity(intent);
+//            Intent intent = new Intent(mainActivity, MainActivity.class);
+//            mainActivity.startActivity(intent);
         });
     }
 

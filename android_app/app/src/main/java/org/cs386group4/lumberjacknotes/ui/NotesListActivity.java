@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.content.Intent;
+//import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
+//import com.google.android.material.floatingactionbutton.FloatingActionButton;
+//
 import org.cs386group4.lumberjacknotes.R;
 import org.cs386group4.lumberjacknotes.controllers.adapters.NotesAdapter;
 import org.cs386group4.lumberjacknotes.models.Notes;
@@ -24,7 +24,7 @@ import java.io.ObjectInputStream;
 
 public class NotesListActivity extends AppCompatActivity
 {
-
+//
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -43,7 +43,7 @@ public class NotesListActivity extends AppCompatActivity
 
         // Reinitialize notes list whenever navigating back to this activity
         initNotesList();
-
+//
 //        initNewNoteButton(mainNotesActivity);
     }
 
@@ -79,15 +79,15 @@ public class NotesListActivity extends AppCompatActivity
             e.printStackTrace();
         }
     }
-
-    private void initNewNoteButton(MainActivity mainActivity)
-    {
-        FloatingActionButton newNoteButton = mainActivity.findViewById(R.id.new_note_button);
-
-        newNoteButton.setOnClickListener(view ->
-        {
-            new Notes(UserProfile.getInstance()).setContent("New note");
-            System.out.println(UserProfile.getInstance().getWrittenNotes().size());
-        });
-    }
+//
+//    private void initNewNoteButton(MainActivity mainActivity)
+//    {
+//        FloatingActionButton newNoteButton = mainActivity.findViewById(R.id.new_note_button);
+//
+//        newNoteButton.setOnClickListener(view ->
+//        {
+//            new Notes(UserProfile.getInstance()).setContent("New note");
+//            System.out.println(UserProfile.getInstance().getWrittenNotes().size());
+//        });
+//    }
 }
