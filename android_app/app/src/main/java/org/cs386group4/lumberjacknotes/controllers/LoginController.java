@@ -23,7 +23,7 @@ import org.cs386group4.lumberjacknotes.ui.NotesListActivity;
  */
 public class LoginController
 {
-    private boolean isLoginMode = true;
+    private boolean isLogin = true;
 
     /**
      * Initialize the login controller
@@ -109,8 +109,15 @@ public class LoginController
         loginButton.setOnClickListener(view ->
         {
             // TODO: Handle real login from cloud database
-            Intent intent = new Intent(loginActivity, NotesListActivity.class);
-            loginActivity.startActivity(intent);
+            if (isLogin)
+            {
+                Intent intent = new Intent(loginActivity, NotesListActivity.class);
+                loginActivity.startActivity(intent);
+            }
+            else
+            {
+                // TODO: Sign up
+            }
         });
     }
 
@@ -126,13 +133,13 @@ public class LoginController
         registerButton.setOnClickListener(view ->
         {
             // Handle MotionLayout transition
-            if (isLoginMode)
+            if (isLogin)
                 motionLayout.transitionToEnd();
             else
                 motionLayout.transitionToStart();
 
             // Set transition state
-            isLoginMode = !isLoginMode;
+            isLogin = !isLogin;
         });
     }
 }
