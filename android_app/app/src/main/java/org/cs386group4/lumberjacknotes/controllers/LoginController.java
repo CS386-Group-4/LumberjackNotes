@@ -4,9 +4,11 @@ import android.animation.LayoutTransition;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import androidx.constraintlayout.motion.widget.MotionLayout;
 
+import com.amplifyframework.core.Amplify;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -63,6 +65,12 @@ public class LoginController
             public void onTransitionTrigger(MotionLayout motionLayout, int triggerId, boolean positive, float progress)
             {}
         });
+
+        // TODO: Cognito authentication
+        Amplify.Auth.fetchAuthSession(
+                result -> Log.i("AmplifyQuickstart", result.toString()),
+                error -> Log.e("AmplifyQuickstart", error.toString())
+        );
     }
 
     /**
