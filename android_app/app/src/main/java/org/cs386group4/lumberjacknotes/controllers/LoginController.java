@@ -2,9 +2,12 @@ package org.cs386group4.lumberjacknotes.controllers;
 
 import android.animation.LayoutTransition;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 
 import androidx.constraintlayout.motion.widget.MotionLayout;
@@ -40,8 +43,7 @@ public class LoginController
     private String signupPasswordConfirm;
     // Declares variables for use with grabbing user input for the sign up authentication process
     EditText signupAuthenticationText;
-    private String tempAuthenticationString;
-    private int authenticationValue;
+    private String authenticationString;
 
     /**
      * Initialize the login controller
@@ -65,16 +67,14 @@ public class LoginController
         signinEmail = signinEmailText.getText().toString();
         signinPassword = signinPasswordText.getText().toString();
         // Initializes variables for use with grabbing user input for the sign up process
-        signupEmailText = loginActivity.findViewById(R.id.email_field);
-        signupPasswordText = loginActivity.findViewById(R.id.password_field);
+        signupEmailText = signinEmailText;
+        signupPasswordText = signinPasswordText;
         signupPasswordConfirmText = loginActivity.findViewById(R.id.passwordconfirm_field);
         signupEmail = signupEmailText.getText().toString();
         signupPassword = signupPasswordText.getText().toString();
         signupPasswordConfirm = signupPasswordConfirmText.getText().toString();
         // Initializes variables for use with grabbing user input for the sign up authentication process
-        signupAuthenticationText = loginActivity.findViewById(R.id.authentication_field);
-        tempAuthenticationString = signupAuthenticationText.getText().toString();
-        authenticationValue = 0;
+        signupAuthenticationText = loginActivity.findViewById(R.id.verification_edit_text);
 
         // TODO: Cognito authentication
         Amplify.Auth.fetchAuthSession(
@@ -130,9 +130,7 @@ public class LoginController
             signupPassword = signupPasswordText.getText().toString();
             signupPasswordConfirm = signupPasswordConfirmText.getText().toString();
 
-            signupAuthenticationText = loginActivity.findViewById(R.id.authentication_field);
-            tempAuthenticationString = signupAuthenticationText.getText().toString();
-            authenticationValue = 0;
+            signupAuthenticationText = loginActivity.findViewById(R.id.verification_edit_text);
 
             // TODO: Handle real login from cloud database
             if (isLogin)
@@ -155,21 +153,24 @@ public class LoginController
                         error -> Log.e("AuthQuickStart", "Sign up failed", error)
                 );
 
-                if(!"".equals(tempAuthenticationString))
+                registrationAlertDialog(loginActivity);
+                if(authenticationString == null)
                 {
-                    authenticationValue = Integer.parseInt(tempAuthenticationString);
+                    registrationAlertDialog(loginActivity);
                 }
+                else
+                {
+                    // TODO: Create an authentication input so that confirmSignUp can confirm a user in the system for signup
+                    Amplify.Auth.confirmSignUp(
+                            signupEmail,
+                            authenticationString,
+                            result -> Log.i("AuthQuickstart", result.isSignUpComplete() ? "Confirm signUp succeeded" : "Confirm sign up not complete"),
+                            error -> Log.e("AuthQuickstart", error.toString())
+                    );
 
-//                TODO: Create an authentication input so that confirmSignUp can confirm a user in the system for signup
-//                Amplify.Auth.confirmSignUp(
-//                        signupEmail,
-//                        authenticationValue,
-//                        result -> Log.i("AuthQuickstart", result.isSignUpComplete() ? "Confirm signUp succeeded" : "Confirm sign up not complete"),
-//                        error -> Log.e("AuthQuickstart", error.toString())
-//                );
-
-                Intent intent = new Intent(loginActivity, NotesListActivity.class);
-                loginActivity.startActivity(intent);
+                    Intent intent = new Intent(loginActivity, NotesListActivity.class);
+                    loginActivity.startActivity(intent);
+                }
             }
         });
     }
@@ -194,5 +195,35 @@ public class LoginController
             // Set transition state
             isLogin = !isLogin;
         });
+    }
+
+    /**
+     * Creates an Android AlertDialog to retrieve user input for sign up authentication
+     * @param loginActivity Current context
+     */
+    public void registrationAlertDialog(LoginActivity loginActivity)
+    {
+        AlertDialog.Builder authenticationButton = new AlertDialog.Builder(loginActivity);
+        authenticationButton.setTitle("Enter email authentication code:");
+
+        final View customLayout = loginActivity.getLayoutInflater().inflate(R.layout.account_verification_dialog, null);
+        authenticationButton.setView(customLayout);
+
+        authenticationButton.setPositiveButton("Confirm", (dialog, which) ->
+        {
+            EditText confirmationCode = customLayout.findViewById(R.id.verification_edit_text);
+            authenticationString = confirmationCode.getText().toString();
+
+        });
+        authenticationButton.setNegativeButton("Resend", (dialog, which) ->
+        {
+            // TODO
+        });
+        authenticationButton.setNeutralButton("Cancel", (dialog, which) ->
+        {
+            // TODO
+        });
+        AlertDialog dialog = authenticationButton.create();
+        dialog.show();
     }
 }
