@@ -8,6 +8,8 @@ import android.util.Log;
 
 import androidx.constraintlayout.motion.widget.MotionLayout;
 
+import com.amplifyframework.auth.AuthUserAttributeKey;
+import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
@@ -21,7 +23,7 @@ import org.cs386group4.lumberjacknotes.ui.NotesListActivity;
  */
 public class LoginController
 {
-    private boolean transitionedToStart = true;
+    private boolean isLoginMode = true;
 
     /**
      * Initialize the login controller
@@ -37,6 +39,34 @@ public class LoginController
         initMotionLayout(loginActivity, motionLayout);
         initLoginButton(loginActivity);
         initRegisterButton(loginActivity, motionLayout);
+
+        // TODO: Cognito authentication
+        Amplify.Auth.fetchAuthSession(
+                result -> Log.i("AmplifyQuickstart", result.toString()),
+                error -> Log.e("AmplifyQuickstart", error.toString())
+        );
+
+//        AuthSignUpOptions options = AuthSignUpOptions.builder()
+//                .userAttribute(AuthUserAttributeKey.email(), "my@email.com")
+//                .build();
+//        Amplify.Auth.signUp("username", "Password123", options,
+//                result -> Log.i("AuthQuickStart", "Result: " + result.toString()),
+//                error -> Log.e("AuthQuickStart", "Sign up failed", error)
+//        );
+//
+//        Amplify.Auth.confirmSignUp(
+//                "username",
+//                "the code you received via email",
+//                result -> Log.i("AuthQuickstart", result.isSignUpComplete() ? "Confirm signUp succeeded" : "Confirm sign up not complete"),
+//                error -> Log.e("AuthQuickstart", error.toString())
+//        );
+//
+//        Amplify.Auth.signIn(
+//                "username",
+//                "password",
+//                result -> Log.i("AuthQuickstart", result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete"),
+//                error -> Log.e("AuthQuickstart", error.toString())
+//        );
     }
 
     private void initMotionLayout(Activity activity, MotionLayout motionLayout)
@@ -65,12 +95,6 @@ public class LoginController
             public void onTransitionTrigger(MotionLayout motionLayout, int triggerId, boolean positive, float progress)
             {}
         });
-
-        // TODO: Cognito authentication
-        Amplify.Auth.fetchAuthSession(
-                result -> Log.i("AmplifyQuickstart", result.toString()),
-                error -> Log.e("AmplifyQuickstart", error.toString())
-        );
     }
 
     /**
@@ -102,13 +126,13 @@ public class LoginController
         registerButton.setOnClickListener(view ->
         {
             // Handle MotionLayout transition
-            if (transitionedToStart)
+            if (isLoginMode)
                 motionLayout.transitionToEnd();
             else
                 motionLayout.transitionToStart();
 
             // Set transition state
-            transitionedToStart = !transitionedToStart;
+            isLoginMode = !isLoginMode;
         });
     }
 }
