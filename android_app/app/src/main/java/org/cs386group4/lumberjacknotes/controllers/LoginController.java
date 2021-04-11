@@ -132,7 +132,6 @@ public class LoginController
 
             signupAuthenticationText = loginActivity.findViewById(R.id.verification_edit_text);
 
-            // TODO: Handle real login from cloud database
             if (isLogin)
             {
                 Amplify.Auth.signIn(
@@ -141,10 +140,12 @@ public class LoginController
                         result -> Log.i("AuthQuickstart", result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete"),
                         error -> Log.e("AuthQuickstart", error.toString())
                 );
+
+                Intent intent = new Intent(loginActivity, NotesListActivity.class);
+                loginActivity.startActivity(intent);
             }
             else
             {
-                // TODO: Sign up
                 AuthSignUpOptions options = AuthSignUpOptions.builder()
                         .userAttribute(AuthUserAttributeKey.email(), signupEmail)
                         .build();
@@ -160,13 +161,15 @@ public class LoginController
                 }
                 else
                 {
-                    // TODO: Create an authentication input so that confirmSignUp can confirm a user in the system for signup
                     Amplify.Auth.confirmSignUp(
                             signupEmail,
                             authenticationString,
                             result -> Log.i("AuthQuickstart", result.isSignUpComplete() ? "Confirm signUp succeeded" : "Confirm sign up not complete"),
                             error -> Log.e("AuthQuickstart", error.toString())
                     );
+
+//                    View signupButton = loginActivity.findViewById(R.id.register_button);
+//                    signupButton.performClick();
 
                     Intent intent = new Intent(loginActivity, NotesListActivity.class);
                     loginActivity.startActivity(intent);
@@ -213,15 +216,21 @@ public class LoginController
         {
             EditText confirmationCode = customLayout.findViewById(R.id.verification_edit_text);
             authenticationString = confirmationCode.getText().toString();
-
         });
-        authenticationButton.setNegativeButton("Resend", (dialog, which) ->
-        {
-            // TODO
-        });
+//        authenticationButton.setNegativeButton("Resend", (dialog, which) ->
+//        {
+//            // TODO
+//        });
         authenticationButton.setNeutralButton("Cancel", (dialog, which) ->
         {
-            // TODO
+            authenticationButton.setOnCancelListener(new DialogInterface.OnCancelListener()
+            {
+                @Override
+                public void onCancel(DialogInterface dialog)
+                {
+                    loginActivity.finish();
+                }
+            });
         });
         AlertDialog dialog = authenticationButton.create();
         dialog.show();
