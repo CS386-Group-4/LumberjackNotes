@@ -1,6 +1,7 @@
 package org.cs386group4.lumberjacknotes.controllers;
 
 import android.content.Context;
+import android.content.Intent;
 //import android.content.Intent;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -19,13 +20,13 @@ public class WorkspaceController
 {
     Notes currentNote;
 
-    UserProfile dummyUserProfile = UserProfile.getInstance();
+    UserProfile userProfile = UserProfile.getInstance();
 
     public WorkspaceController(MainActivity mainActivity, int notePosition)
     {
         initNewNoteButton(mainActivity);
 
-        currentNote = dummyUserProfile.getWrittenNotes().get(notePosition);
+        currentNote = userProfile.getWrittenNotes().get(notePosition);
     }
 
     private void initNewNoteButton(MainActivity mainActivity)
@@ -37,6 +38,7 @@ public class WorkspaceController
             new Notes(UserProfile.getInstance()).setContent("New note");
             System.out.println(UserProfile.getInstance().getWrittenNotes().size());
 
+//            // Currently only opens to the first note; not sure why
 //            Intent intent = new Intent(mainActivity, MainActivity.class);
 //            mainActivity.startActivity(intent);
         });
@@ -49,7 +51,7 @@ public class WorkspaceController
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream))
         {
             // Creates file where the UserProfile will be stored locally
-            objectOutputStream.writeObject(dummyUserProfile);
+            objectOutputStream.writeObject(userProfile);
         }
         catch (IOException e)
         {

@@ -15,12 +15,15 @@ import android.widget.SearchView;
 import org.cs386group4.lumberjacknotes.R;
 import org.cs386group4.lumberjacknotes.controllers.NoteTakingController;
 import org.cs386group4.lumberjacknotes.controllers.WorkspaceController;
+import org.cs386group4.lumberjacknotes.models.UserProfile;
 
 public class MainActivity extends AppCompatActivity
 {
     WorkspaceController workspaceController;
 
 //    Save save;
+
+    int notePosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -35,7 +38,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         this.invalidateOptionsMenu();
 
-        int notePosition = getIntent().getIntExtra("note_position", 0);
+        notePosition = getIntent().getIntExtra("note_position", 0);
 
         // Initialize workspace controller
         workspaceController = new WorkspaceController(this, notePosition);
@@ -44,6 +47,15 @@ public class MainActivity extends AppCompatActivity
         ViewGroup notetakingRoot = findViewById(R.id.notetaking_root);
         new NoteTakingController(workspaceController, notetakingRoot);
     }
+
+//    // Intended to update the note position so that a new note opens the most recent note instead of the first note
+//    @Override
+//    protected void onResume()
+//    {
+//        super.onResume();
+//
+//        notePosition = UserProfile.getInstance().getWrittenNotes().indexOf(UserProfile.getInstance().getWrittenNotes().size());
+//    }
 
     @Override
     protected void onDestroy()

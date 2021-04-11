@@ -143,6 +143,7 @@ public class LoginController
                 // Upon successful sign in, go to the notes list
                 Intent intent = new Intent(loginActivity, NotesListActivity.class);
                 loginActivity.startActivity(intent);
+                loginActivity.finish();
             }
             // Otherwise, the user must sign up for an account
             else
