@@ -119,33 +119,35 @@ public class LoginController
     {
         MaterialButton loginButton = loginActivity.findViewById(R.id.login_button);
 
-
         // Handle logging in upon user clicking the login button
         loginButton.setOnClickListener(view ->
         {
+            // Initializes user input variables to user input text
             signinEmail = signinEmailText.getText().toString();
             signinPassword = signinPasswordText.getText().toString();
-
             signupEmail = signupEmailText.getText().toString();
             signupPassword = signupPasswordText.getText().toString();
             signupPasswordConfirm = signupPasswordConfirmText.getText().toString();
-
             signupAuthenticationText = loginActivity.findViewById(R.id.verification_edit_text);
 
+            // If the user is signing in
             if (isLogin)
             {
+                // Use AWS Amplify to sign in to the application
                 Amplify.Auth.signIn(
                         signinEmail,
                         signinPassword,
                         result -> Log.i("AuthQuickstart", result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete"),
                         error -> Log.e("AuthQuickstart", error.toString())
                 );
-
+                // Upon successful sign in, go to the notes list
                 Intent intent = new Intent(loginActivity, NotesListActivity.class);
                 loginActivity.startActivity(intent);
             }
+            // Otherwise, the user must sign up for an account
             else
             {
+                // Creates an account for the user on our AWS Amplify deployment
                 AuthSignUpOptions options = AuthSignUpOptions.builder()
                         .userAttribute(AuthUserAttributeKey.email(), signupEmail)
                         .build();
@@ -154,23 +156,19 @@ public class LoginController
                         error -> Log.e("AuthQuickStart", "Sign up failed", error)
                 );
 
+                // Brings up AlertDialog needed to confirm the user's account
                 registrationAlertDialog(loginActivity);
-                if(authenticationString == null)
+                // IF the user has inputted the verification code from their email, continue
+                if(authenticationString != null)
                 {
-                    registrationAlertDialog(loginActivity);
-                }
-                else
-                {
+                    // Confirms the users account on our AWS Amplify deployment
                     Amplify.Auth.confirmSignUp(
                             signupEmail,
                             authenticationString,
                             result -> Log.i("AuthQuickstart", result.isSignUpComplete() ? "Confirm signUp succeeded" : "Confirm sign up not complete"),
                             error -> Log.e("AuthQuickstart", error.toString())
                     );
-
-//                    View signupButton = loginActivity.findViewById(R.id.register_button);
-//                    signupButton.performClick();
-
+                    // Upon successful sign up, go to the notes list
                     Intent intent = new Intent(loginActivity, NotesListActivity.class);
                     loginActivity.startActivity(intent);
                 }
@@ -206,32 +204,29 @@ public class LoginController
      */
     public void registrationAlertDialog(LoginActivity loginActivity)
     {
+        // Initializes AlertDialog builder variable and sets its title
         AlertDialog.Builder authenticationButton = new AlertDialog.Builder(loginActivity);
         authenticationButton.setTitle("Enter email authentication code:");
-
+        // Initializes the AlertDialog view
         final View customLayout = loginActivity.getLayoutInflater().inflate(R.layout.account_verification_dialog, null);
         authenticationButton.setView(customLayout);
 
+        // Creates confrim button and saves user input to the authentication string variable
         authenticationButton.setPositiveButton("Confirm", (dialog, which) ->
         {
             EditText confirmationCode = customLayout.findViewById(R.id.verification_edit_text);
             authenticationString = confirmationCode.getText().toString();
         });
+//        // Placeholder code for resending authorization. AWS Amplify has no documentation for implementation in Java.
 //        authenticationButton.setNegativeButton("Resend", (dialog, which) ->
 //        {
 //            // TODO
 //        });
+        // Creates cancel button on Alert Dialog; Does not need an implementation
         authenticationButton.setNeutralButton("Cancel", (dialog, which) ->
         {
-            authenticationButton.setOnCancelListener(new DialogInterface.OnCancelListener()
-            {
-                @Override
-                public void onCancel(DialogInterface dialog)
-                {
-                    loginActivity.finish();
-                }
-            });
         });
+        // Creates and displays dialog from AlertDialog builder variable (authentication builder)
         AlertDialog dialog = authenticationButton.create();
         dialog.show();
     }
