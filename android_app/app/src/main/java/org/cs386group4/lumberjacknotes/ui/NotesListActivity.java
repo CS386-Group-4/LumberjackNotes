@@ -7,12 +7,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-//import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 
-//import com.google.android.material.floatingactionbutton.FloatingActionButton;
-//
 import org.cs386group4.lumberjacknotes.R;
 import org.cs386group4.lumberjacknotes.controllers.adapters.NotesAdapter;
 import org.cs386group4.lumberjacknotes.models.Notes;
@@ -24,7 +22,6 @@ import java.io.ObjectInputStream;
 
 public class NotesListActivity extends AppCompatActivity
 {
-//
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -33,6 +30,20 @@ public class NotesListActivity extends AppCompatActivity
 
         // Load the UserProfile data once; future modifications stored in memory
         loadUserProfile(this);
+
+        initTopBar();
+    }
+
+    /**
+     * Initialize the top bar (Toolbar) which will contain a menu
+     */
+    private void initTopBar()
+    {
+        // Set the activity's action bar to the Toolbar in the layout
+        setSupportActionBar(findViewById(R.id.toolbar));
+
+        // Refresh the menu on the activity's action bar
+        this.invalidateOptionsMenu();
     }
 
     @Override
@@ -42,8 +53,18 @@ public class NotesListActivity extends AppCompatActivity
 
         // Reinitialize notes list whenever navigating back to this activity
         initNotesList();
-//
+
 //        initNewNoteButton(mainNotesActivity);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        // Inflate notes_list_menu and apply to activity's action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.notes_list_menu, menu);
+
+        return true;
     }
 
     /**

@@ -9,6 +9,8 @@
 
     <string name="login">Login</string>
     <string name="register">Sign Up</string>
+    <string name="sign_out">Sign Out</string>
+
     <string name="login_banner_title">@string/app_name</string>
     <string name="login_banner_subtitle">@string/login</string>
     <string name="login_register_banner">Don\'t have an account yet?</string>
