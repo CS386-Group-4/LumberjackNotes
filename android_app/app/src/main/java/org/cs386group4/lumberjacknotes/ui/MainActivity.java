@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity
 {
     WorkspaceController workspaceController;
 
-//    Save save;
+    NoteTakingController noteTakingController;
 
     int notePosition;
 
@@ -45,16 +45,21 @@ public class MainActivity extends AppCompatActivity
 
         // Initialize note taking controller
         ViewGroup notetakingRoot = findViewById(R.id.notetaking_root);
-        new NoteTakingController(workspaceController, notetakingRoot);
+        noteTakingController = new NoteTakingController(workspaceController, notetakingRoot);
+
+//        // Attempted to initialize search results; Results in fatal error
+//        noteTakingController.initSearchResults(this);
     }
 
 //    // Intended to update the note position so that a new note opens the most recent note instead of the first note
+//    // Also intended to initialize search results
 //    @Override
 //    protected void onResume()
 //    {
 //        super.onResume();
 //
-//        notePosition = UserProfile.getInstance().getWrittenNotes().indexOf(UserProfile.getInstance().getWrittenNotes().size());
+//        //notePosition = UserProfile.getInstance().getWrittenNotes().indexOf(UserProfile.getInstance().getWrittenNotes().size());
+//        noteTakingController.initSearchResults(this);
 //    }
 
     @Override
