@@ -56,6 +56,29 @@ Demo Link: https://www.youtube.com/watch?v=RRkJhQmXec8
 
 ## 4. Code quality
 
+For the project architecture, we implemented several design patterns to keep the codebase organized, clean, and
+understandable. Examples of these techniques include:
+
+- **Singleton Design Pattern:** We implemented this design pattern in the UserProfile feature of Lumberjack Notes.
+- **Bridge Design Pattern:** This design pattern was implemented into the Tools feature of our application. The fact
+that this class extends the Organization class is indicative of the pattern.
+
+We also selected a design pattern at the start of our implementation and have been abiding by it throughout the
+creation of Lumberjack Notes to ensure that our code can be easily managed:
+
+- **MVC Architecture:** At the beginning of our first release, we decided to adhere to this software architecture so
+that our code was set up in a familiar and understandable way. We have been abiding by the MVC architecture ever since
+and it has proved to be an effective way of separating the concerns and responsibilities of parts of our code.
+
+The team also followed certain best practices to ensure that code quality was always our highest priority:
+
+- **Pair Programming:** The team found it extremely beneficial during this release to code with a partner. This led to
+a higher quality of code overall because multiple people were working on one feature at once. This also led to higher
+efficiency since everyone knew what was happening in the code.
+- **Documentation:** Every feature that is included in Lumberjack Notes is well documented with JavaDocs documentation
+to ensure that our code can be easily understood by other developers.
+- **Software Principles:** Over the course of this release, we kept the SOLID and DRY design principles in mind so that
+we were producing manageable software.
 
 
 ## 5. Lessons learned
