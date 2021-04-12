@@ -5,9 +5,16 @@ import android.text.TextWatcher;
 import android.view.ViewGroup;
 
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.cs386group4.lumberjacknotes.R;
+import org.cs386group4.lumberjacknotes.controllers.adapters.NotesAdapter;
+import org.cs386group4.lumberjacknotes.controllers.adapters.SearchAdapter;
 import org.cs386group4.lumberjacknotes.models.Notes;
+import org.cs386group4.lumberjacknotes.models.UserProfile;
+import org.cs386group4.lumberjacknotes.ui.MainActivity;
 
 public class NoteTakingController
 {
@@ -43,5 +50,21 @@ public class NoteTakingController
     public void setCurrentNote(Notes note)
     {
         this.currentNote = note;
+    }
+
+    // Still needs work to display search results in the note taking environment; Currently does nothing
+    public void initSearchResults(MainActivity mainActivity)
+    {
+//        if (UserProfile.getInstance().getWrittenNotes().size() == 0)
+//        {
+//            new Notes(UserProfile.getInstance()).setContent("First note\nStart typing now...");
+//        }
+
+        SearchAdapter searchAdapter = new SearchAdapter(UserProfile.getInstance().getWrittenNotes());
+        RecyclerView notesList = mainActivity.findViewById(R.id.notes_list);
+
+        notesList.addItemDecoration(new DividerItemDecoration(mainActivity, DividerItemDecoration.VERTICAL));
+        notesList.setLayoutManager(new LinearLayoutManager(mainActivity));
+        notesList.setAdapter(searchAdapter);
     }
 }
