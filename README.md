@@ -1,5 +1,5 @@
 # LumberjackNotes
-**Version: 1.0.0**
+**Version: 2.0.0**
 
 Lumberjack Notes is a note-taking application that improves both professionals’ and students’ note-taking ability by offering an easy, quick way of accessing the user interface. It also allows users to effectively share their notes with colleagues enhancing communication and collaboration remotely, which is significant in today’s time.
 
