@@ -1,18 +1,23 @@
 package org.cs386group4.lumberjacknotes.controllers;
 
 import android.animation.LayoutTransition;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.IntDef;
+import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.motion.widget.MotionLayout;
 
+import com.amazonaws.services.cognitoidentityprovider.model.NotAuthorizedException;
 import com.amplifyframework.auth.AuthException;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthSession;
@@ -22,11 +27,18 @@ import com.amplifyframework.auth.result.AuthSignUpResult;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.core.Consumer;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.cs386group4.lumberjacknotes.R;
 import org.cs386group4.lumberjacknotes.ui.LoginActivity;
 import org.cs386group4.lumberjacknotes.ui.NotesListActivity;
+
+import static com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_INDEFINITE;
+import static com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG;
+import static com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT;
 
 /**
  * Controller to handle logging in with the {@link LoginActivity}
@@ -224,7 +236,7 @@ public class LoginController
         loginActivity.runOnUiThread(() ->
         {
             // Initializes AlertDialog builder variable and sets its title
-            AlertDialog.Builder authenticationButton = new AlertDialog.Builder(loginActivity);
+            MaterialAlertDialogBuilder authenticationButton = new MaterialAlertDialogBuilder(loginActivity);
             authenticationButton.setTitle("Enter email authentication code:");
             // Initializes the AlertDialog view
             final View customLayout = loginActivity.getLayoutInflater().inflate(R.layout.account_verification_dialog, null);
@@ -305,6 +317,28 @@ public class LoginController
         });
     }
 
+    /**
+     * Display a {@link Snackbar} (a small banner) at the bottom of the screen temporarily
+     * @param stringId The resource id of the string resource to use. Can be formatted text.
+     * @param duration How long to display the message. Can be {@link BaseTransientBottomBar#LENGTH_SHORT}, {@link
+     *     BaseTransientBottomBar#LENGTH_LONG}, {@link BaseTransientBottomBar#LENGTH_INDEFINITE}, or a custom duration
+     *     in milliseconds.
+     */
+    private void displaySnackbar(@StringRes int stringId, @BaseTransientBottomBar.Duration int duration)
+    {
+        loginActivity.runOnUiThread(() ->
+        {
+            Log.e("displaySnackbar", loginActivity.getString(stringId));
+            Snackbar snackbar = Snackbar.make(motionLayout, stringId, duration)
+                    .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE);
+
+            TextView snackbarText = snackbar.getView().findViewById(com.google.android.material.R.id.snackbar_text);
+            snackbarText.setMaxLines(5); // Increase max lines to fit full error messages
+
+            snackbar.show();
+        });
+    }
+
     private final Consumer<AuthSignInResult> onSignInSuccess = result ->
     {
         Log.i("onSignInSuccess", result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete");
@@ -334,8 +368,31 @@ public class LoginController
 
         handleLoadingDialog(false);
 
-        // TODO: Handle UserNotFoundException
-        // TODO: Handle UserNotConfirmedException
+        if (error instanceof AuthException.UserNotFoundException)
+        {
+            displaySnackbar(R.string.user_does_not_exist, LENGTH_SHORT);
+        }
+        else if (error instanceof AuthException.UserNotConfirmedException)
+        {
+            displaySnackbar(R.string.login_user_not_confirmed, LENGTH_SHORT);
+            registrationAlertDialog();
+        }
+        else if (error instanceof AuthException.InvalidParameterException)
+        {
+            displaySnackbar(R.string.login_invalid_parameter, LENGTH_SHORT);
+        }
+        else
+        {
+            // Check if AuthException cause is NotAuthorizedException
+            if (error.getCause() instanceof NotAuthorizedException)
+            {
+                displaySnackbar(R.string.login_not_authorized, LENGTH_SHORT);
+            }
+            else
+            {
+                displaySnackbar(R.string.login_error_login_other, LENGTH_SHORT);
+            }
+        }
     };
 
     private final Consumer<AuthSignUpResult> onSignUpSuccess = result ->
@@ -360,5 +417,18 @@ public class LoginController
         Log.e("onSignUpError", error.toString());
 
         handleLoadingDialog(false);
+
+        if (error instanceof AuthException.UsernameExistsException)
+        {
+            displaySnackbar(R.string.user_does_not_exist, LENGTH_SHORT);
+        }
+        else if (error instanceof AuthException.InvalidParameterException)
+        {
+            displaySnackbar(R.string.login_invalid_parameter, LENGTH_SHORT);
+        }
+        else
+        {
+            displaySnackbar(R.string.login_error_login_other, LENGTH_SHORT);
+        }
     };
 }

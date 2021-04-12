@@ -17,6 +17,15 @@
     <string name="login_register_banner">Don\'t have an account yet?</string>
     <string name="login_register_text">Sign Up</string>
 
+    <string name="login_user_not_found">Your account was not found! Check your login information and try again.</string>
+    <string name="login_user_not_confirmed">Your account is not verified yet!</string>
+    <string name="login_not_authorized">Your login information was incorrect! Please try again.</string>
+    <string name="login_user_exists">That username is already taken!</string>
+    <string name="login_invalid_parameter">Your login information is invalid! Make sure you are using 8 characters, and
+        at least 1 capital letter, number, and special character.</string>
+    <string name="login_error_login_other">There was an unknown error signing in!</string>
+    <string name="login_error_register_other">There was an unknown error signing up!</string>
+
     <string name="note_searchable_hint">Search notes…</string>
     <string name="prompt_email">E-mail</string>
     <string name="prompt_password">Password</string>
