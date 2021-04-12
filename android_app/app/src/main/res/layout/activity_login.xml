@@ -121,7 +121,6 @@
             android:minHeight="28dp"
             android:padding="0dp"
             android:maxLines="1"
-            android:onClick="registrationAlertDialog"
             android:text="@string/login_register_text"
             android:textAllCaps="false"
             android:textColor="@color/primary"
