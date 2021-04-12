@@ -1,8 +1,8 @@
 package org.cs386group4.lumberjacknotes.controllers;
 
 import android.animation.LayoutTransition;
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -66,10 +66,10 @@ public class LoginController
         motionLayout.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
 
         // Initialize login and register buttons
-        initMotionLayout(loginActivity, motionLayout);
+        initMotionLayout();
         initLoginButton();
-        initRegisterButton(loginActivity, motionLayout);
-
+        initRegisterButton();
+        initLoadingDialog();
 
         // Initializes variables for use with grabbing user input for the sign in process
         signinEmailText = loginActivity.findViewById(R.id.email_field);
@@ -110,9 +110,9 @@ public class LoginController
                 });
     }
 
-    private static void initMotionLayout(Activity activity, MotionLayout motionLayout)
+    private void initMotionLayout()
     {
-        TextInputLayout passwordConfirmContainer = activity.findViewById(R.id.passwordconfirm_field_container);
+        TextInputLayout passwordConfirmContainer = loginActivity.findViewById(R.id.passwordconfirm_field_container);
 
         motionLayout.addTransitionListener(new MotionLayout.TransitionListener()
         {
@@ -148,6 +148,8 @@ public class LoginController
         // Handle logging in upon user clicking the login button
         loginButton.setOnClickListener(view ->
         {
+            handleLoadingDialog(true);
+
             // Initializes user input variables to user input text
             signinEmail = signinEmailText.getText().toString();
             signinPassword = signinPasswordText.getText().toString();
@@ -185,9 +187,8 @@ public class LoginController
 
     /**
      * Initialize the register button such as by adding a click listener to it
-     * @param loginActivity valid instance to get a {@link Context} from
      */
-    private void initRegisterButton(LoginActivity loginActivity, MotionLayout motionLayout)
+    private void initRegisterButton()
     {
         MaterialButton registerButton = loginActivity.findViewById(R.id.register_button);
 
@@ -203,6 +204,15 @@ public class LoginController
             // Set transition state
             isLogin = !isLogin;
         });
+    }
+
+    private void initLoadingDialog()
+    {
+        progressDialog = new ProgressDialog(loginActivity);
+        progressDialog.setTitle(loginActivity.getString(R.string.app_name));
+        progressDialog.setMessage(loginActivity.getString(R.string.loading));
+        progressDialog.setIndeterminate(false);
+        progressDialog.setCancelable(false); // Prevent user from interacting with anything
     }
 
     /**
@@ -234,12 +244,8 @@ public class LoginController
                 Toast.makeText(loginActivity, "Resend button clicked!", Toast.LENGTH_SHORT).show();
             });
 
-            // Creates cancel button on Alert Dialog; Does not need an implementation
-            authenticationButton.setNeutralButton("Cancel", (dialog, which) ->
-            {
-                // TODO: Remove toast
-                Toast.makeText(loginActivity, "Cancel button clicked!", Toast.LENGTH_SHORT).show();
-            });
+            // Creates cancel button on AlertDialog; does not need a click implementation
+            authenticationButton.setNeutralButton("Cancel", (dialog, which) -> {});
 
             // Creates and displays dialog from AlertDialog builder variable (authentication builder)
             AlertDialog dialog = authenticationButton.create();
@@ -249,6 +255,8 @@ public class LoginController
 
     private void confirmConfirmationCode(String confirmationCode)
     {
+        handleLoadingDialog(true);
+
         // Confirms the users account on our AWS Amplify deployment
         Amplify.Auth.confirmSignUp(
                 signupEmail,
@@ -279,10 +287,30 @@ public class LoginController
         loginActivity.finish();
     }
 
+    // TODO: Move global field to top of class
+    private ProgressDialog progressDialog;
+
+    /**
+     * Show or hide the loading dialog
+     * @param isShown whether or not the loading dialog is shown
+     */
+    private void handleLoadingDialog(boolean isShown)
+    {
+        loginActivity.runOnUiThread(() ->
+        {
+            if (isShown)
+                progressDialog.show();
+            else
+                progressDialog.hide();
+        });
+    }
+
     private final Consumer<AuthSignInResult> onSignInSuccess = result ->
     {
         Log.i("onSignInSuccess", result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete");
         Log.i("onSignInSuccess", result.toString());
+
+        handleLoadingDialog(false);
 
         switch (result.getNextStep().getSignInStep())
         {
@@ -304,6 +332,8 @@ public class LoginController
     {
         Log.e("onSignInError", error.toString());
 
+        handleLoadingDialog(false);
+
         // TODO: Handle UserNotFoundException
         // TODO: Handle UserNotConfirmedException
     };
@@ -311,6 +341,8 @@ public class LoginController
     private final Consumer<AuthSignUpResult> onSignUpSuccess = result ->
     {
         Log.i("onSignUpSuccess", result.toString());
+
+        handleLoadingDialog(false);
 
         switch (result.getNextStep().getSignUpStep())
         {
@@ -326,5 +358,7 @@ public class LoginController
     private final Consumer<AuthException> onSignUpError = error ->
     {
         Log.e("onSignUpError", error.toString());
+
+        handleLoadingDialog(false);
     };
 }
