@@ -69,7 +69,8 @@
             android:layout_marginTop="0dp"
             android:hint="@string/prompt_password_confirm"
             android:focusable="false"
-            android:clickable="false">
+            android:clickable="false"
+            android:enabled="false">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordconfirm_field"
