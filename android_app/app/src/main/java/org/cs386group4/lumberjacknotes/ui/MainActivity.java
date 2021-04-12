@@ -15,10 +15,15 @@ import android.widget.SearchView;
 import org.cs386group4.lumberjacknotes.R;
 import org.cs386group4.lumberjacknotes.controllers.NoteTakingController;
 import org.cs386group4.lumberjacknotes.controllers.WorkspaceController;
+import org.cs386group4.lumberjacknotes.models.UserProfile;
 
 public class MainActivity extends AppCompatActivity
 {
     WorkspaceController workspaceController;
+
+    NoteTakingController noteTakingController;
+
+    int notePosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -33,13 +38,29 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         this.invalidateOptionsMenu();
 
+        notePosition = getIntent().getIntExtra("note_position", 0);
+
         // Initialize workspace controller
-        workspaceController = new WorkspaceController(this);
+        workspaceController = new WorkspaceController(this, notePosition);
 
         // Initialize note taking controller
         ViewGroup notetakingRoot = findViewById(R.id.notetaking_root);
-        new NoteTakingController(workspaceController, notetakingRoot);
+        noteTakingController = new NoteTakingController(workspaceController, notetakingRoot);
+
+//        // Attempted to initialize search results; Results in fatal error
+//        noteTakingController.initSearchResults(this);
     }
+
+//    // Intended to update the note position so that a new note opens the most recent note instead of the first note
+//    // Also intended to initialize search results
+//    @Override
+//    protected void onResume()
+//    {
+//        super.onResume();
+//
+//        //notePosition = UserProfile.getInstance().getWrittenNotes().indexOf(UserProfile.getInstance().getWrittenNotes().size());
+//        noteTakingController.initSearchResults(this);
+//    }
 
     @Override
     protected void onDestroy()
