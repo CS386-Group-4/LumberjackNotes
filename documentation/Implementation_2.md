@@ -21,6 +21,7 @@ Trello: https://trello.com/b/3lbd1jw9/cs-386-notes-app
     - Estimated Hours: 12
 
 [Link to Trello Card](https://trello.com/c/PP8MOc3s)
+
 [Link to Pull Request](https://github.com/CS386-Group-4/LumberjackNotes/pull/163)
 
 Name of Implementer(s): [Gustavo Valencia](https://github.com/GustavoMiguelValencia) and [Nick Botticelli](https://github.com/nick-botticelli)
@@ -38,6 +39,7 @@ enhance my experience."
     - Estimated Hours: 12
 
 [Link to Trello Card](https://trello.com/c/mXxqQ24y)
+
 [Link to Pull Request](https://github.com/CS386-Group-4/LumberjackNotes/pull/153)
 
 Name of Implementer(s): [Collin Rampata](https://github.com/Crampata) and [Nick Botticelli](https://github.com/nick-botticelli)
