@@ -21,14 +21,13 @@ Trello: https://trello.com/b/3lbd1jw9/cs-386-notes-app
     - Estimated Hours: 12
 
 [Link to Trello Card](https://trello.com/c/PP8MOc3s)
-[Link to Pull Request](./TODO: Create pull request to link to)
+[Link to Pull Request](https://github.com/CS386-Group-4/LumberjackNotes/pull/163)
 
-Name of Implementer(s): TODO: Insert names of implementers with a link to their GitHub profiles
+Name of Implementer(s): [Gustavo Valencia](https://github.com/GustavoMiguelValencia) and [Nick Botticelli](https://github.com/nick-botticelli)
 
-Name of Reviewer/Approver: TODO: Insert name of reviewer/approver with a link to their GitHub profile
+Name of Reviewer/Approver: [Nick Botticelli](https://github.com/nick-botticelli)
 
 [Screenshot(s) Depicting Implemented Feature:](./TODO: Insert screenshot once feature is complete)
-
 
 2. User Story: "As a college student, I want to be able customize my note-taking workspace to fit my specific needs to
 enhance my experience."  
@@ -36,18 +35,30 @@ enhance my experience."
     - Estimated Hours: 12
 
 [Link to Trello Card](https://trello.com/c/mXxqQ24y)
-[Link to Pull Request](./TODO: Create pull request to link to)
+[Link to Pull Request](https://github.com/CS386-Group-4/LumberjackNotes/pull/153)
 
-Name of Implementer(s): TODO: Insert names of implementers with a link to their GitHub profiles
+Name of Implementer(s): [Collin Rampata](https://github.com/Crampata) and [Nick Botticelli](https://github.com/nick-botticelli)
 
-Name of Reviewer/Approver: TODO: Insert name of reviewer/approver with a link to their GitHub profile
+Name of Reviewer/Approver: [Nick Botticelli](https://github.com/nick-botticelli)
+
+[Screenshot(s) Depicting Implemented Feature:](./TODO: Insert screenshot once feature is complete)
 
 ## 3. Demo
 
-
+Demo Link:
 
 ## 4. Code quality
 
 
 
 ## 5. Lessons learned
+
+Over the course of the second release, our team gained knowledge in several different areas of software development.
+For many members of the team, it was their first time using AWS Amplify (or any AWS Service for that matter). This
+service provided us with valuable experience in back-end development and was imperative for the creation of our log-in
+and sign-up features. We found the construction of this especially challenging however, and if we could start over and
+select a different back-end service, our team would have used Google FireBase instead of AWS. There were several errors
+that we encountered in AWS Amplify that were not included in the documentation, so solving them deemed to be very
+challenging since we had nothing to reference. Despite these obstacles, our team was able to work collaboratively to
+overcome them. We managed our time much better during our second release and that helped mitigate a crunch before the
+deadline.
