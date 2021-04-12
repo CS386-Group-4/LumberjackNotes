@@ -4,17 +4,23 @@ import android.animation.LayoutTransition;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.motion.widget.MotionLayout;
 
+import com.amplifyframework.auth.AuthException;
 import com.amplifyframework.auth.AuthUserAttributeKey;
+import com.amplifyframework.auth.cognito.AWSCognitoAuthSession;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
+import com.amplifyframework.auth.result.AuthSignInResult;
+import com.amplifyframework.auth.result.AuthSignUpResult;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.core.Consumer;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -27,6 +33,10 @@ import org.cs386group4.lumberjacknotes.ui.NotesListActivity;
  */
 public class LoginController
 {
+    private final @NonNull LoginActivity loginActivity;
+    private final @NonNull MotionLayout motionLayout;
+
+    // Whether the activity is set to handle logging in or signing up
     private boolean isLogin = true;
 
     // Declares variables for use with grabbing user input for the sign in process
@@ -40,24 +50,24 @@ public class LoginController
     EditText signupPasswordConfirmText;
     private String signupEmail;
     private String signupPassword;
-    private String signupPasswordConfirm;
+    private String signupPasswordConfirm; // TODO: Use this to validate password
     // Declares variables for use with grabbing user input for the sign up authentication process
     EditText signupAuthenticationText;
-    private String authenticationString;
 
     /**
      * Initialize the login controller
      * @param loginActivity valid instance to get a {@link Context} from
      */
-    public LoginController(LoginActivity loginActivity)
+    public LoginController(@NonNull LoginActivity loginActivity)
     {
-        MotionLayout motionLayout = loginActivity.findViewById(R.id.login_container);
+        this.loginActivity = loginActivity;
+        this.motionLayout = loginActivity.findViewById(R.id.login_container);
 
         motionLayout.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
 
         // Initialize login and register buttons
         initMotionLayout(loginActivity, motionLayout);
-        initLoginButton(loginActivity);
+        initLoginButton();
         initRegisterButton(loginActivity, motionLayout);
 
 
@@ -76,14 +86,31 @@ public class LoginController
         // Initializes variables for use with grabbing user input for the sign up authentication process
         signupAuthenticationText = loginActivity.findViewById(R.id.verification_edit_text);
 
-        // TODO: Cognito authentication
+        // Fetch authentication session from AWS
         Amplify.Auth.fetchAuthSession(
-                result -> Log.i("AmplifyQuickstart", result.toString()),
-                error -> Log.e("AmplifyQuickstart", error.toString())
-        );
+                result ->
+                {
+                    AWSCognitoAuthSession cognitoAuthSession = (AWSCognitoAuthSession) result;
+
+                    switch (cognitoAuthSession.getIdentityId().getType())
+                    {
+                        case SUCCESS:
+                            Log.i("AuthQuickStart", "IdentityId: " + cognitoAuthSession.getIdentityId().getValue());
+                            break;
+                        case FAILURE:
+                            assert cognitoAuthSession.getIdentityId().getError() != null; // Is not null because of Type.FAILURE
+                            Log.i("AuthQuickStart", "IdentityId not present because: " + cognitoAuthSession.getIdentityId().getError().toString());
+                            // TODO: Display warning to user
+                    }
+                },
+                error ->
+                {
+                    Log.e("AmplifyQuickstart", error.toString());
+                    // TODO: Display warning to user
+                });
     }
 
-    private void initMotionLayout(Activity activity, MotionLayout motionLayout)
+    private static void initMotionLayout(Activity activity, MotionLayout motionLayout)
     {
         TextInputLayout passwordConfirmContainer = activity.findViewById(R.id.passwordconfirm_field_container);
 
@@ -113,9 +140,8 @@ public class LoginController
 
     /**
      * Initialize the login button such as by adding a click listener to it
-     * @param loginActivity valid {@link LoginActivity} instance to get a {@link Context} from
      */
-    private void initLoginButton(LoginActivity loginActivity)
+    private void initLoginButton()
     {
         MaterialButton loginButton = loginActivity.findViewById(R.id.login_button);
 
@@ -130,49 +156,29 @@ public class LoginController
             signupPasswordConfirm = signupPasswordConfirmText.getText().toString();
             signupAuthenticationText = loginActivity.findViewById(R.id.verification_edit_text);
 
-            // If the user is signing in
+            Log.e("initLoginButton", "isLogin: " + isLogin);
+
             if (isLogin)
             {
-                // Use AWS Amplify to sign in to the application
                 Amplify.Auth.signIn(
                         signinEmail,
                         signinPassword,
-                        result -> Log.i("AuthQuickstart", result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete"),
-                        error -> Log.e("AuthQuickstart", error.toString())
-                );
-                // Upon successful sign in, go to the notes list
-                Intent intent = new Intent(loginActivity, NotesListActivity.class);
-                loginActivity.startActivity(intent);
-                loginActivity.finish();
+                        onSignInSuccess,
+                        onSignInError);
             }
-            // Otherwise, the user must sign up for an account
             else
             {
                 // Creates an account for the user on our AWS Amplify deployment
                 AuthSignUpOptions options = AuthSignUpOptions.builder()
                         .userAttribute(AuthUserAttributeKey.email(), signupEmail)
                         .build();
-                Amplify.Auth.signUp(signupEmail, signupPassword, options,
-                        result -> Log.i("AuthQuickStart", "Result: " + result.toString()),
-                        error -> Log.e("AuthQuickStart", "Sign up failed", error)
-                );
 
-                // Brings up AlertDialog needed to confirm the user's account
-                registrationAlertDialog(loginActivity);
-                // IF the user has inputted the verification code from their email, continue
-                if(authenticationString != null)
-                {
-                    // Confirms the users account on our AWS Amplify deployment
-                    Amplify.Auth.confirmSignUp(
-                            signupEmail,
-                            authenticationString,
-                            result -> Log.i("AuthQuickstart", result.isSignUpComplete() ? "Confirm signUp succeeded" : "Confirm sign up not complete"),
-                            error -> Log.e("AuthQuickstart", error.toString())
-                    );
-                    // Upon successful sign up, go to the notes list
-                    Intent intent = new Intent(loginActivity, NotesListActivity.class);
-                    loginActivity.startActivity(intent);
-                }
+                Amplify.Auth.signUp(
+                        signupEmail,
+                        signupPassword,
+                        options,
+                        onSignUpSuccess,
+                        onSignUpError);
             }
         });
     }
@@ -200,35 +206,125 @@ public class LoginController
     }
 
     /**
-     * Creates an Android AlertDialog to retrieve user input for sign up authentication
-     * @param loginActivity Current context
+     * Creates an {@link AlertDialog} to retrieve user input for sign up authentication
      */
-    public void registrationAlertDialog(LoginActivity loginActivity)
+    public void registrationAlertDialog()
     {
-        // Initializes AlertDialog builder variable and sets its title
-        AlertDialog.Builder authenticationButton = new AlertDialog.Builder(loginActivity);
-        authenticationButton.setTitle("Enter email authentication code:");
-        // Initializes the AlertDialog view
-        final View customLayout = loginActivity.getLayoutInflater().inflate(R.layout.account_verification_dialog, null);
-        authenticationButton.setView(customLayout);
+        // Always run AlertDialog code on UI thread (main thread) to avoid exceptions
+        loginActivity.runOnUiThread(() ->
+        {
+            // Initializes AlertDialog builder variable and sets its title
+            AlertDialog.Builder authenticationButton = new AlertDialog.Builder(loginActivity);
+            authenticationButton.setTitle("Enter email authentication code:");
+            // Initializes the AlertDialog view
+            final View customLayout = loginActivity.getLayoutInflater().inflate(R.layout.account_verification_dialog, null);
+            authenticationButton.setView(customLayout);
 
-        // Creates confrim button and saves user input to the authentication string variable
-        authenticationButton.setPositiveButton("Confirm", (dialog, which) ->
-        {
-            EditText confirmationCode = customLayout.findViewById(R.id.verification_edit_text);
-            authenticationString = confirmationCode.getText().toString();
+            // Creates confirm button and saves user input to the authentication string variable
+            authenticationButton.setPositiveButton("Confirm", (dialog, which) ->
+            {
+                EditText confirmationCode = customLayout.findViewById(R.id.verification_edit_text);
+                //authenticationString = confirmationCode.getText().toString();
+                confirmConfirmationCode(confirmationCode.getText().toString());
+            });
+
+            // TODO: Code for resending authorization. AWS Amplify has no documentation for implementation in Java.
+            authenticationButton.setNegativeButton("Resend", (dialog, which) ->
+            {
+                Toast.makeText(loginActivity, "Resend button clicked!", Toast.LENGTH_SHORT).show();
+            });
+
+            // Creates cancel button on Alert Dialog; Does not need an implementation
+            authenticationButton.setNeutralButton("Cancel", (dialog, which) ->
+            {
+                // TODO: Remove toast
+                Toast.makeText(loginActivity, "Cancel button clicked!", Toast.LENGTH_SHORT).show();
+            });
+
+            // Creates and displays dialog from AlertDialog builder variable (authentication builder)
+            AlertDialog dialog = authenticationButton.create();
+            dialog.show();
         });
-//        // Placeholder code for resending authorization. AWS Amplify has no documentation for implementation in Java.
-//        authenticationButton.setNegativeButton("Resend", (dialog, which) ->
-//        {
-//            // TODO
-//        });
-        // Creates cancel button on Alert Dialog; Does not need an implementation
-        authenticationButton.setNeutralButton("Cancel", (dialog, which) ->
-        {
-        });
-        // Creates and displays dialog from AlertDialog builder variable (authentication builder)
-        AlertDialog dialog = authenticationButton.create();
-        dialog.show();
     }
+
+    private void confirmConfirmationCode(String confirmationCode)
+    {
+        // Confirms the users account on our AWS Amplify deployment
+        Amplify.Auth.confirmSignUp(
+                signupEmail,
+                confirmationCode,
+                onSignUpSuccess,
+                onSignUpError);
+    }
+
+    /**
+     * Move from the current {@link LoginActivity} to the notes list activity ({@link NotesListActivity})
+     * @param isSignUp Whether the user has just signed up in order to display a custom message to the user
+     */
+    private void goToNextActivity(boolean isSignUp)
+    {
+        if (isSignUp)
+        {
+            // Must show Toast on UI thread (main thread)
+            loginActivity.runOnUiThread(() -> Toast.makeText(loginActivity,  "Thank you for signing up to" +
+                    " Lumberjack Notes! Your account is now confirmed.", Toast.LENGTH_SHORT).show());
+
+        }
+
+        // Go to the notes list activity
+        Intent intent = new Intent(loginActivity, NotesListActivity.class);
+        loginActivity.startActivity(intent);
+
+        // Finish the current activity and destroy it; no navigating backwards to this activity from the next activity
+        loginActivity.finish();
+    }
+
+    private final Consumer<AuthSignInResult> onSignInSuccess = result ->
+    {
+        Log.i("onSignInSuccess", result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete");
+        Log.i("onSignInSuccess", result.toString());
+
+        switch (result.getNextStep().getSignInStep())
+        {
+            case CONFIRM_SIGN_IN_WITH_SMS_MFA_CODE:
+            case CONFIRM_SIGN_IN_WITH_CUSTOM_CHALLENGE:
+            case CONFIRM_SIGN_IN_WITH_NEW_PASSWORD:
+            case RESET_PASSWORD:
+                break;
+            case CONFIRM_SIGN_UP:
+                registrationAlertDialog();
+                break;
+            case DONE:
+                goToNextActivity(false);
+                break;
+        }
+    };
+
+    private final Consumer<AuthException> onSignInError = error ->
+    {
+        Log.e("onSignInError", error.toString());
+
+        // TODO: Handle UserNotFoundException
+        // TODO: Handle UserNotConfirmedException
+    };
+
+    private final Consumer<AuthSignUpResult> onSignUpSuccess = result ->
+    {
+        Log.i("onSignUpSuccess", result.toString());
+
+        switch (result.getNextStep().getSignUpStep())
+        {
+            case CONFIRM_SIGN_UP_STEP:
+                registrationAlertDialog();
+                break;
+            case DONE:
+                goToNextActivity(true);
+                break;
+        }
+    };
+
+    private final Consumer<AuthException> onSignUpError = error ->
+    {
+        Log.e("onSignUpError", error.toString());
+    };
 }
