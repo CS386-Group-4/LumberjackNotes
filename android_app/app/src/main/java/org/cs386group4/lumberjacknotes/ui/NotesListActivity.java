@@ -7,11 +7,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
+
+import com.amplifyframework.auth.options.AuthSignOutOptions;
+import com.amplifyframework.core.Amplify;
+import com.google.android.material.button.MaterialButton;
 
 import org.cs386group4.lumberjacknotes.R;
+import org.cs386group4.lumberjacknotes.controllers.NotesListController;
 import org.cs386group4.lumberjacknotes.controllers.adapters.NotesAdapter;
 import org.cs386group4.lumberjacknotes.models.Notes;
 import org.cs386group4.lumberjacknotes.models.UserProfile;
@@ -22,14 +30,17 @@ import java.io.ObjectInputStream;
 
 public class NotesListActivity extends AppCompatActivity
 {
+    NotesListController notesListController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes_list);
 
+        notesListController = new NotesListController(this);
         // Load the UserProfile data once; future modifications stored in memory
-        loadUserProfile(this);
+        notesListController.loadUserProfile(this);
 
         initTopBar();
     }
@@ -52,8 +63,9 @@ public class NotesListActivity extends AppCompatActivity
         super.onResume();
 
         // Reinitialize notes list whenever navigating back to this activity
-        initNotesList();
+        notesListController.initNotesList(this);
 
+//        // New note button is currently having issues
 //        initNewNoteButton(mainNotesActivity);
     }
 
@@ -67,47 +79,25 @@ public class NotesListActivity extends AppCompatActivity
         return true;
     }
 
-    /**
-     * Initialize the RecyclerView and NotesAdapter to display the list of notes
-     */
-    private void initNotesList()
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem)
     {
-        if (UserProfile.getInstance().getWrittenNotes().size() == 0)
+        switch(menuItem.getItemId())
         {
-            new Notes(UserProfile.getInstance()).setContent("First note\nStart typing now...");
-        }
+            case R.id.notes_list_sign_out:
+                Amplify.Auth.signOut(
+                        AuthSignOutOptions.builder().globalSignOut(true).build(),
+                        () -> Log.i("AuthQuickstart", "Signed out globally"),
+                        error -> Log.e("AuthQuickstart", error.toString())
+                );
+                // Upon successful sign out, go to the notes list
+                Intent intent = new Intent(this, LoginActivity.class);
+                this.startActivity(intent);
+                this.finish();
+                return true;
 
-        NotesAdapter notesAdapter = new NotesAdapter(UserProfile.getInstance().getWrittenNotes());
-        RecyclerView notesList = findViewById(R.id.notes_list);
-
-        notesList.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        notesList.setLayoutManager(new LinearLayoutManager(this));
-        notesList.setAdapter(notesAdapter);
-    }
-
-    private void loadUserProfile(@NonNull Context context)
-    {
-
-        try (FileInputStream fileInputStream = context.openFileInput("UserProfile.txt");
-             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream))
-        {
-            // Opens and reads file where the UserProfile will be stored locally
-            objectInputStream.readObject();
-        }
-        catch (IOException | ClassNotFoundException e)
-        {
-            e.printStackTrace();
+            default:
+                return false;
         }
     }
-//
-//    private void initNewNoteButton(MainActivity mainActivity)
-//    {
-//        FloatingActionButton newNoteButton = mainActivity.findViewById(R.id.new_note_button);
-//
-//        newNoteButton.setOnClickListener(view ->
-//        {
-//            new Notes(UserProfile.getInstance()).setContent("New note");
-//            System.out.println(UserProfile.getInstance().getWrittenNotes().size());
-//        });
-//    }
 }
