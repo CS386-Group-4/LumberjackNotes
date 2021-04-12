@@ -28,12 +28,9 @@ Name of Implementer(s): [Gustavo Valencia](https://github.com/GustavoMiguelValen
 Name of Reviewer/Approver: [Nick Botticelli](https://github.com/nick-botticelli)
 
 Screenshot(s) Depicting Implemented Feature:
-
-(./images/D6BeforeSave.png)
-
-(./images/D6Editing.png)
-
-(./images/D6SaveProof.png)
+![Screenshot(s) Depicting Implemented Feature:](./images/D6BeforeSave.png)
+![Screenshot(s) Depicting Implemented Feature:](./images/D6Editing.png)
+![Screenshot(s) Depicting Implemented Feature:](./images/D6SaveProof.png)
 
 2. User Story: "As a college student, I want to be able customize my note-taking workspace to fit my specific needs to
 enhance my experience."  
@@ -48,10 +45,8 @@ Name of Implementer(s): [Collin Rampata](https://github.com/Crampata) and [Nick 
 Name of Reviewer/Approver: [Nick Botticelli](https://github.com/nick-botticelli)
 
 Screenshot(s) Depicting Implemented Feature:
-
-(./images/D6BeforeCustomization.png)
-
-(./images/D6AfterCustomization.png)
+![Screenshot(s) Depicting Implemented Feature:](./images/D6BeforeCustomization.png)
+![Screenshot(s) Depicting Implemented Feature:](./images/D6AfterCustomization.png)
 
 ## 3. Demo
 
