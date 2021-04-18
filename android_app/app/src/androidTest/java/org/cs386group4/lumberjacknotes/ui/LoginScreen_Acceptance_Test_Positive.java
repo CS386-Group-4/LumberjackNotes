@@ -1,6 +1,5 @@
 package org.cs386group4.lumberjacknotes.ui;
 
-
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -37,58 +36,41 @@ public class LoginScreen_Acceptance_Test_Positive
 
     @Before
     public void setUp()
-        {
-            /**
-             * Action: Enters credentials
-             */
-            enterLoginCredentials(testingEmail, testingPassword);
-
-            /**
-             * Action: Taps the Login Button
-             */
-            ViewInteraction materialButton = onView(
-                    allOf(withId(R.id.login_button), isDisplayed()));
-            materialButton.check(matches(isDisplayed()));
-            materialButton.perform(click());
-
-
-        }
-
-    @Test
-    public void loginScreen_Acceptance_Test()
     {
-        /**
-         * Assertion: Checks if the inside Title "LumberjackNotes" is being displayed
-        */
-        ViewInteraction textView = onView(
-                allOf(withText("Lumberjack Notes"), isDisplayed()));
-        textView.check(matches(isDisplayed()));
+        // Action: Enters credentials
+        enterLoginCredentials(testingEmail, testingPassword);
 
-        /**
-         * Action: Signs Out
-         */
-        ViewInteraction materialButton = onView(
-                allOf(withId(R.id.notes_list_sign_out), isDisplayed()));
+        // Action: Taps the Login Button
+        ViewInteraction materialButton = onView(allOf(withId(R.id.login_button), isDisplayed()));
         materialButton.check(matches(isDisplayed()));
         materialButton.perform(click());
     }
 
+    @Test
+    public void loginScreen_Acceptance_Test()
+    {
+        // Assertion: Checks if the inside Title "LumberjackNotes" is being displayed
+        ViewInteraction textView = onView(allOf(withText("Lumberjack Notes"), isDisplayed()));
+        textView.check(matches(isDisplayed()));
+
+        // Action: Signs Out
+        ViewInteraction materialButton = onView(allOf(withId(R.id.notes_list_sign_out), isDisplayed()));
+        materialButton.check(matches(isDisplayed()));
+        materialButton.perform(click());
+    }
 
     /**
      * This method uses the parameters Email and Password to enter the login Credentials into their respective
-     * fields(if these are visible at the moment)
+     * fields (if these are visible at the moment)
      */
     private static void enterLoginCredentials(String Email, String Password)
-        {
+    {
+        ViewInteraction textInputEditText = onView(allOf(withId(R.id.email_field), isDisplayed()));
+        textInputEditText.check(matches(isDisplayed()));
+        textInputEditText.perform(replaceText(Email), closeSoftKeyboard());
 
-            ViewInteraction textInputEditText = onView(
-                    allOf(withId(R.id.email_field), isDisplayed()));
-            textInputEditText.check(matches(isDisplayed()));
-            textInputEditText.perform(replaceText(Email), closeSoftKeyboard());
-
-            ViewInteraction textInputEditText2 = onView(
-                    allOf(withId(R.id.password_field), isDisplayed()));
-            textInputEditText2.check(matches(isDisplayed()));
-            textInputEditText2.perform(replaceText(Password), closeSoftKeyboard());
-        }
+        ViewInteraction textInputEditText2 = onView(allOf(withId(R.id.password_field), isDisplayed()));
+        textInputEditText2.check(matches(isDisplayed()));
+        textInputEditText2.perform(replaceText(Password), closeSoftKeyboard());
+    }
 }
