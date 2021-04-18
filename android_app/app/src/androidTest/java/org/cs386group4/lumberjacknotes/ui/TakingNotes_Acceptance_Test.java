@@ -39,16 +39,11 @@ public class TakingNotes_Acceptance_Test
     @Before
     public void setUp()
     {
-        /**
-         * Action: Enters credentials
-         */
+        // Action: Enters credentials
         enterLoginCredentials(testingEmail, testingPassword);
 
-        /**
-         * Action: Taps the Login Button
-         */
-        ViewInteraction materialButton = onView(
-                allOf(withId(R.id.login_button), isDisplayed()));
+        // Action: Taps the Login Button
+        ViewInteraction materialButton = onView(allOf(withId(R.id.login_button), isDisplayed()));
         materialButton.check(matches(isDisplayed()));
         materialButton.perform(click());
     }
@@ -56,33 +51,23 @@ public class TakingNotes_Acceptance_Test
     @Test
     public void takingNotes_Acceptance_Test()
     {
-        /**
-         * Action: Taps the notes_list object
-         */
-        ViewInteraction recyclerView = onView(
-                allOf(withId(R.id.notes_list)));
+        // Action: Taps the notes_list object
+        ViewInteraction recyclerView = onView(allOf(withId(R.id.notes_list)));
         recyclerView.perform(actionOnItemAtPosition(0, click()));
 
-        /**
-         * Action: Replaces Default Message with "Testing"
-         */
-        ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.notetaking_editor), withText("First note\nStart typing now...")));
+        // Action: Replaces Default Message with "Testing"
+        ViewInteraction appCompatEditText = onView(allOf(withId(R.id.notetaking_editor),
+                withText("First note\nStart typing now...")));
         appCompatEditText.check(matches(isDisplayed()));
         appCompatEditText.perform(replaceText("Testing"));
         pressBack();
 
-        /**
-         * Assertion: Checks if the text outside of notetaking_editor(note_content) was correctly replaced to "Testing"
-         */
+        // Assertion: Checks if the text outside of notetaking_editor(note_content) was correctly replaced to "Testing"
         ViewInteraction textView = onView(allOf(withId(R.id.note_content), withText("Testing"), isDisplayed()));
         textView.check(matches(withText("Testing")));
 
-        /**
-         * Action: Signs Out
-         */
-        ViewInteraction materialButton = onView(
-                allOf(withId(R.id.notes_list_sign_out), isDisplayed()));
+        // Action: Signs Out
+        ViewInteraction materialButton = onView(allOf(withId(R.id.notes_list_sign_out), isDisplayed()));
         materialButton.check(matches(isDisplayed()));
         materialButton.perform(click());
     }
@@ -92,16 +77,13 @@ public class TakingNotes_Acceptance_Test
      * fields(if these are visible at the moment)
      */
     private static void enterLoginCredentials(String Email, String Password)
-        {
+    {
+        ViewInteraction textInputEditText = onView(allOf(withId(R.id.email_field), isDisplayed()));
+        textInputEditText.check(matches(isDisplayed()));
+        textInputEditText.perform(replaceText(Email), closeSoftKeyboard());
 
-            ViewInteraction textInputEditText = onView(
-                    allOf(withId(R.id.email_field), isDisplayed()));
-            textInputEditText.check(matches(isDisplayed()));
-            textInputEditText.perform(replaceText(Email), closeSoftKeyboard());
-
-            ViewInteraction textInputEditText2 = onView(
-                    allOf(withId(R.id.password_field), isDisplayed()));
-            textInputEditText2.check(matches(isDisplayed()));
-            textInputEditText2.perform(replaceText(Password), closeSoftKeyboard());
-        }
+        ViewInteraction textInputEditText2 = onView(allOf(withId(R.id.password_field), isDisplayed()));
+        textInputEditText2.check(matches(isDisplayed()));
+        textInputEditText2.perform(replaceText(Password), closeSoftKeyboard());
+    }
 }
