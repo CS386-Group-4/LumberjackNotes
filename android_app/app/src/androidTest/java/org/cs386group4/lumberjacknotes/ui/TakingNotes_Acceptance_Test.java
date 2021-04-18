@@ -19,6 +19,7 @@ import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
@@ -67,9 +68,7 @@ public class TakingNotes_Acceptance_Test
         textView.check(matches(withText("Testing")));
 
         // Action: Signs Out
-        ViewInteraction materialButton = onView(allOf(withId(R.id.notes_list_sign_out), isDisplayed()));
-        materialButton.check(matches(isDisplayed()));
-        materialButton.perform(click());
+        signOut();
     }
 
     /**
@@ -85,5 +84,18 @@ public class TakingNotes_Acceptance_Test
         ViewInteraction textInputEditText2 = onView(allOf(withId(R.id.password_field), isDisplayed()));
         textInputEditText2.check(matches(isDisplayed()));
         textInputEditText2.perform(replaceText(Password), closeSoftKeyboard());
+    }
+
+    private static void signOut()
+    {
+        ViewInteraction materialButton = onView(
+                allOf(withContentDescription("More options"), isDisplayed()));
+        materialButton.check(matches(isDisplayed()));
+        materialButton.perform(click());
+
+        ViewInteraction materialButton2 = onView(
+                allOf(withId(R.id.title), withText("Sign Out"),isDisplayed()));
+        materialButton2.check(matches(isDisplayed()));
+        materialButton2.perform(click());
     }
 }

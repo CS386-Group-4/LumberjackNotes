@@ -19,6 +19,7 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
@@ -54,9 +55,7 @@ public class LoginScreen_Acceptance_Test_Positive
         textView.check(matches(isDisplayed()));
 
         // Action: Signs Out
-        ViewInteraction materialButton = onView(allOf(withId(R.id.notes_list_sign_out), isDisplayed()));
-        materialButton.check(matches(isDisplayed()));
-        materialButton.perform(click());
+        signOut();
     }
 
     /**
@@ -73,4 +72,18 @@ public class LoginScreen_Acceptance_Test_Positive
         textInputEditText2.check(matches(isDisplayed()));
         textInputEditText2.perform(replaceText(Password), closeSoftKeyboard());
     }
+
+    private static void signOut()
+    {
+        ViewInteraction materialButton = onView(
+                allOf(withContentDescription("More options"), isDisplayed()));
+        materialButton.check(matches(isDisplayed()));
+        materialButton.perform(click());
+
+        ViewInteraction materialButton2 = onView(
+                allOf(withId(R.id.title), withText("Sign Out"),isDisplayed()));
+        materialButton2.check(matches(isDisplayed()));
+        materialButton2.perform(click());
+    }
+
 }
