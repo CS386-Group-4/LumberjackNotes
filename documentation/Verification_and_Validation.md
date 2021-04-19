@@ -5,7 +5,19 @@ Group Members: Gustavo Valencia, Armando Martinez, Stefan Mihailovic, Nicholas B
 
 ## 1. Description
 
-TODO: Insert 1-2 paragraphs describing system.
+Lumberjack Notes is a free note-taking application designed to help students and professionals collaborate and share
+their notes with their colleagues. Our application aims to provide a user-friendly interface with an intuitive
+note-taking environment. Users of Lumberjack Notes will have the ability to customize and modify their workspace to fit
+their needs. Users will also have the option to share their notes with fellow students or colleagues. The application
+aims to provide a customizable and user-friendly interface, as well as an unobtrusive note-taking environment.
+
+Our Android application is currently in the alpha testing phase of development, and is thus only available to select
+developers and users. Participants can create an account with Lumberjack Notes, and sign in via the main page. After
+logging in, users will be brought to the note-taking environment, where they will be able to type their notes and
+customize their toolbar to their liking. This includes editing and rearranging their tools to fit their specific needs.
+The toolbar can also be utilized while typing, making the users note-taking experience more fluid. Note-takers will
+also have access to a search function that will allow them to quickly view other notes they have written. Users can
+also modify their profile quickly through easy-to-use buttons in the note-taking environment.
 
 GitHub: https://github.com/CS386-Group-4/LumberjackNotes
 
