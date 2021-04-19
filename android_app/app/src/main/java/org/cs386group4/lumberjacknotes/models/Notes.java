@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Notes implements Serializable // Testing Serializable for Data Storage
 {
     // Declares global variables
-    private UserProfile userProfile;
+    private final UserProfile userProfile;
     private String name;
     private String content;
     private boolean accessControls;
@@ -112,6 +112,15 @@ public class Notes implements Serializable // Testing Serializable for Data Stor
     }
 
     /**
+     * Getter method that returns a note's {@link UserProfile}
+     * @return {@link UserProfile} of this {@link Notes} object
+     */
+    public UserProfile getUserProfile()
+    {
+        return userProfile;
+    }
+
+    /**
      * This function returns the written notes ArrayList. Currently used to retrieve a copy of the array from
      * other classes, like the userProfile class.
      * @return ArrayList of written notes
@@ -130,31 +139,6 @@ public class Notes implements Serializable // Testing Serializable for Data Stor
         return accessControls;
     }
 
-//    /**
-//     *
-//     * @param mainActivity
-//     */
-//    public void loadNotes(MainActivity mainActivity)
-//    {
-//        try
-//        {
-//            // Opens file where the UserProfile will be stored locally
-//            FileInputStream fileInputStream = mainActivity.openFileInput("UserProfile.txt");
-//            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-//            // Opens UserProfile object from file and closes read access
-//            userProfile = (UserProfile) objectInputStream.readObject();
-//            // TODO: May remove this current note assignment elsewhere once implementations supports multiple notes
-//            currentNote = userProfile.getWrittenNotes().get(0);
-//            objectInputStream.close();
-//            fileInputStream.close();
-//        }
-//        catch(IOException | ClassNotFoundException e)
-//        {
-//            e.printStackTrace();
-//        }
-//
-//    }
-
     /**
      * This function searches through the writtenNotes arrayList for notes that have a matching name to the
      * searchString. A new ArrayList of the matching notes is then returned.
@@ -164,7 +148,7 @@ public class Notes implements Serializable // Testing Serializable for Data Stor
     public ArrayList<Notes> searchNotes(String searchString)
     {
         // New ArrayList of Notes objects that will hold the notes with names that match our search string.
-        ArrayList<Notes> searchedNotes = new ArrayList<Notes>();
+        ArrayList<Notes> searchedNotes = new ArrayList<>();
 
         int index;
 
