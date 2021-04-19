@@ -82,7 +82,7 @@ The automated unit tests can be found in our test folder
 
 #### 2.3.3
 
-An example of an acceptance test is [TakingNotes_Acceptance_Test](../android_app/app/src/test/java/org/cs386group4/lumberjacknotes/TakingNotes_Acceptance_Test.java#L163)
+An example of an acceptance test is [TakingNotes_Acceptance_Test](../android_app/app/src/test/java/org/cs386group4/lumberjacknotes/TakingNotes_Acceptance_Test.java#L163).
 The TakingNotes_Acceptance starts by loggin in into a valid testing account. After that, the test accesses the first note and replaces te text in the first note with a testing string. Finally, the test goes back and tests if the change was made successfully. 
 
 #### 2.3.4
