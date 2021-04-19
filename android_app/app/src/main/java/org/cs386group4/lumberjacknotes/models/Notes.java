@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Notes implements Serializable // Testing Serializable for Data Storage
 {
     // Declares global variables
-    private UserProfile userProfile;
+    private final UserProfile userProfile;
     private String name;
     private String content;
     private boolean accessControls;
@@ -148,7 +148,7 @@ public class Notes implements Serializable // Testing Serializable for Data Stor
     public ArrayList<Notes> searchNotes(String searchString)
     {
         // New ArrayList of Notes objects that will hold the notes with names that match our search string.
-        ArrayList<Notes> searchedNotes = new ArrayList<Notes>();
+        ArrayList<Notes> searchedNotes = new ArrayList<>();
 
         int index;
 
