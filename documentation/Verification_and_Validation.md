@@ -53,21 +53,26 @@ Screenshot of the UserProfile.java unit tests executing:
 
 #### 2.2.1
 
-TODO: Insert information about test framework used to develop our tests
+The test framework we used for integration testing was the same as the unit tests: JUnit 4. This framework
+is adequate for not just unit testing, but also for integration testing, as the benefits such as its
+integration with Java and Android Studio makes it the best option for our integration tests.
 
 #### 2.2.2
 
-TODO: Insert link to GitHub folder where automated integration tests are located
+The automated integration tests can be found in our test folder
+[here](../android_app/app/src/test/java/org/cs386group4/lumberjacknotes).
 
 #### 2.2.3
 
-TODO: Insert example of integration test
-TODO: Insert GitHub link to test and explanation about the parts of the system
-being exercised by the test
+One integration test we made was UserNotesIntegrationTest. The
+[bridgeRelationshipTest()](../android_app/app/src/test/java/org/cs386group4/lumberjacknotes/UserNotesIntegrationTest.java#L24)
+method tests the integration of the bridge relationship between UserProfile and Notes objects to make sure that they
+are the same instance as expected.
 
 #### 2.2.4
 
-TODO: Insert screenshot showing integration test executing
+Screenshot of the integration tests executing:
+![Integration Tests](./images/D7IntegrationTestScreenshot.png)
 
 ### 2.3 Acceptance
 
