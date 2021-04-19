@@ -112,6 +112,15 @@ public class Notes implements Serializable // Testing Serializable for Data Stor
     }
 
     /**
+     * Getter method that returns a note's {@link UserProfile}
+     * @return {@link UserProfile} of this {@link Notes} object
+     */
+    public UserProfile getUserProfile()
+    {
+        return userProfile;
+    }
+
+    /**
      * This function returns the written notes ArrayList. Currently used to retrieve a copy of the array from
      * other classes, like the userProfile class.
      * @return ArrayList of written notes
