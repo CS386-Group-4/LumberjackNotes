@@ -18,14 +18,17 @@ These instructions will get you a copy of the project up and running on your loc
 5. Run the application using an emulated device or connected device.
 
 ## Deployment
-TODO
+Since we are in alpha testing, we do not currently have a public deployment available.
 
 ## Contributing
 Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
-TODO: link to available versions
-We use [SemVer](https://semver.org/) for versioning. For the versions available, see the [tags on this repository](TODO: link to the available versions)
+Current Version: [Version 2.0.0](https://github.com/CS386-Group-4/LumberjackNotes/releases/tag/v2.0.0)
+
+Past Version(s): [Version 1.0.0](https://github.com/CS386-Group-4/LumberjackNotes/releases/tag/v1.0.0)
+
+We use [SemVer](https://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/CS386-Group-4/LumberjackNotes/tags)
 
 ## Authors
 - Nick Botticelli - *initial work* - [nick-botticelli](https://github.com/nick-botticelli)
