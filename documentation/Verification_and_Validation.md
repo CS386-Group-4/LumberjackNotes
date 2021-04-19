@@ -17,20 +17,36 @@ Trello: https://trello.com/b/3lbd1jw9/cs-386-notes-app
 
 #### 2.1.1
 
-TODO: Insert information about test framework used to develop our tests
+We chose to use JUnit as our testing framework for our unit tests because it is by far the most popular and widely-used
+unit testing framework for Java. Android Studio includes JUnit4 for testing by default and also provides an example
+unit test file for reference.
 
 #### 2.1.2
 
-TODO: Insert link to GitHub folder where automated unit tests are located
+The automated unit tests can be found in our test folder
+[here](../android_app/app/src/test/java/org/cs386group4/lumberjacknotes).
 
 #### 2.1.3
 
-TODO: Insert example of test case that uses mock objects
-TODO: Insert GitHub link to class being tested and to the test itself
+An example of a test case that uses mock objects is our setAccessControlsTest(). The setAccessControlsTest() method
+utilizes a mock ArrayList of Notes objects named globalNotesTestArrayList. The globalNotesTestArrayList is populated
+with mock Notes objects to be used for testing. Whenever the test suite runs the setAccessControlsTest() test, the
+access controls of mock Notes objects within the mock ArrayList object globalNotesTestArrayList are modified and
+tested.
+
+Link to class being tested can be found
+[here](../android_app/app/src/main//java/org/cs386group4/lumberjacknotes/models/Notes.java).
+
+Link to the test on class above can be found
+[here](../android_app/app/src/test/java/org/cs386group4/lumberjacknotes/NotesUnitTest.java).
 
 #### 2.1.4
 
-TODO: Insert screenshot showing integration test executing
+Screenshot of the Notes.java unit tests executing:
+![Notes.java Unit Tests](./images/D7UnitTestScreenshot1.png)
+
+Screenshot of the UserProfile.java unit tests executing:
+![UserProfile.java Unit Tests](./images/D7UnitTestScreenshot2.png)
 
 ### 2.2 Integration tests
 
