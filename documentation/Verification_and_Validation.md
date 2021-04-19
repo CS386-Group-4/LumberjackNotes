@@ -28,11 +28,12 @@ The automated unit tests can be found in our test folder
 
 #### 2.1.3
 
-An example of a test case that uses mock objects is our setAccessControlsTest(). The setAccessControlsTest() method
-utilizes a mock ArrayList of Notes objects named globalNotesTestArrayList. The globalNotesTestArrayList is populated
-with mock Notes objects to be used for testing. Whenever the test suite runs the setAccessControlsTest() test, the
-access controls of mock Notes objects within the mock ArrayList object globalNotesTestArrayList are modified and
-tested.
+An example of a test case that uses mock objects is our
+[setAccessControlsTest()](../android_app/app/src/test/java/org/cs386group4/lumberjacknotes/NotesUnitTest.java#L163).
+The setAccessControlsTest() method utilizes a mock ArrayList of Notes objects named globalNotesTestArrayList. The
+globalNotesTestArrayList is populated with mock Notes objects to be used for testing. Whenever the test suite runs the
+setAccessControlsTest() test, the access controls of mock Notes objects within the mock ArrayList object
+globalNotesTestArrayList are modified and tested.
 
 Link to class being tested can be found
 [here](../android_app/app/src/main//java/org/cs386group4/lumberjacknotes/models/Notes.java).
