@@ -78,11 +78,10 @@ We chose to use Espresso for our acceptance tests, with JUnit as our runner. Som
 #### 2.3.2
 
 The automated unit tests can be found in our test folder
-[here](../android_app/app/src/test/java/org/cs386group4/lumberjacknotes/ui).
+[here](../android_app/app/src/androidTest/java/org/cs386group4/lumberjacknotes/ui).
 
 #### 2.3.3
-
-An example of an acceptance test is [takingNotes_Acceptance_Test()](../android_app/app/src/test/java/org/cs386group4/lumberjacknotes/TakingNotes_Acceptance_Test.java#L53).
+An example of an acceptance test is [takingNotes_Acceptance_Test()](../android_app/app/src/androidTest/java/org/cs386group4/lumberjacknotes/ui/TakingNotes_Acceptance_Test.java#L53).
 The takingNotes_Acceptance_Test() starts by logging into a valid testing account. After that, the test accesses the first note and replaces the text in the first note with a testing string. Finally, the test goes back and tests if the change was made successfully.
 
 #### 2.3.4
