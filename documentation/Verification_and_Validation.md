@@ -266,14 +266,14 @@ One feature that worked well was the sign in/sign up process. All of our intervi
 made. Another feature that worked well was the toolbar coming up with the keyboard when writing a note. Our
 interviewees agreed that it was very helpful to have tools at their disposal when writing notes, rather than being
 forced to collapse the keyboard and then select tools to be used. One feature that can be changed is the new note
-button being removed from the toolbar when writing a note. Some of our interviewees found it to be unnecessary. Another
-feature that can be changed is the look of the notes list. Some interviewees found it to look bland and worse than
-other parts of the app. The learning curve of our system was found to be very easy to handle. Our interviewees found
-the app to be intuitive and simple to use. The users did indeed perform the tasks as expected. For the most part, the
-users’ actions produced the results they expected. There were a few times where the interviewees needed a bit
-assistance, namely when creating a password during the sign up process. We did not specify the password
-requirements/constraints during the sign up process, which led to confusion. What our interviewees liked the most was
-our sign in/sign up interfaces and toolbar implementation. They thought they were well designed and overall good
-features. Our value proposition is currently not accomplished. While we have made great strides and developed a solid
-minimum viable product, we have not yet implemented the sharing features that would allow our consumer segment to fully
-utilize it.
+button appearing in the toolbar when writing a note. Some of our interviewees found it to be unnecessary and
+recommended removing it. Another feature that can be changed is the look of the notes list. Some interviewees found it
+to look bland and worse than other parts of the app. The learning curve of our system was found to be very easy to
+handle. Our interviewees found the app to be intuitive and simple to use. The users did indeed perform the tasks as
+expected. For the most part, the users’ actions produced the results they expected. There were a few times where the
+interviewees needed a bit of assistance, namely when creating a password during the sign up process. We did not specify
+the password requirements/constraints during the sign up process, which led to confusion. What our interviewees liked
+the most was our sign in/sign up interfaces and toolbar implementation. They thought they were well designed and
+overall good features. Our value proposition is currently not accomplished. While we have made great strides and
+developed a solid minimum viable product, we have not yet implemented the sharing features that would allow our
+consumer segment to fully utilize it.
